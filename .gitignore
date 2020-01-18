@@ -1,2 +1,2 @@
-# igmore all files in the .go/
+# ignore all files in .go
 .go/
