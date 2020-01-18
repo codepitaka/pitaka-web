@@ -10,7 +10,7 @@ func main() {
 	router := SetupRouter()
 	if err := router.Run(); err != nil {
     	// exit with a message and a code status 1 on errors
-		// todo : things should be done for non stopping web. Need routing page for each error code.
+	// todo : things should be done for non stopping web. Need routing page for each error code.
     	log.Fatalf("error running server: %vn", err)
     }
 }
