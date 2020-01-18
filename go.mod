@@ -13,7 +13,9 @@ require (
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/kr/pty v1.1.8 // indirect
 	github.com/mattn/go-shellwords v1.0.6 // indirect
+	github.com/mattn/goveralls v0.0.5 // indirect
 	github.com/ogier/pflag v0.0.1 // indirect
 	github.com/stretchr/testify v1.4.0
+	golang.org/x/tools v0.0.0-20200117220505-0cba7a3a9ee9 // indirect
 	gopkg.in/urfave/cli.v1 v1.20.0 // indirect
 )
