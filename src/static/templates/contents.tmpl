@@ -1,0 +1,9 @@
+{{define "contents"}}
+	<ul>
+		{{ range $key, $value := .contents }}
+			<li>{{ $value }}</li>
+		{{ end }} 
+	</ul>
+{{end}}
+
+
