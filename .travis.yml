@@ -6,6 +6,7 @@ install:
 - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
 - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
 before_script:
+- go get github.com/axw/gocov/gocov
 - go vet ./...
 - go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 - go get golang.org/x/tools/cmd/cover
@@ -14,6 +15,7 @@ script:
 - golangci-lint run
 - go test -v ./... -covermode=count -coverprofile=coverage.out
 - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+
 notifications:
   slack: pitakaworkspace:8Pde05x9c4PsdXHp6nWaZMCY
   webhooks: https://coveralls.io/webhook
