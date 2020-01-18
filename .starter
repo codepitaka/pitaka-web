@@ -1,0 +1,1 @@
+reflex $(cat ./.reflex) -- go run main.go
