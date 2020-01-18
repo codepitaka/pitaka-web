@@ -1,5 +1,11 @@
 # pitaka-web
 
+| Services      | Master        | Develop  |
+| ------------- |:-------------:| :-------:|
+| CI status     | [![Build Status](https://travis-ci.org/codepitaka/pitaka-web.svg?branch=master)](https://travis-ci.org/codepitaka/pitaka-web) |   [![Build Status](https://travis-ci.org/codepitaka/pitaka-web.svg?branch=develop)](https://travis-ci.org/codepitaka/pitaka-web) |
+| test coverage | [![Coverage Status](https://coveralls.io/repos/github/codepitaka/pitaka-web/badge.svg?branch=master)](https://coveralls.io/github/codepitaka/pitaka-web?branch=master)      |     [![Coverage Status](https://coveralls.io/repos/github/codepitaka/pitaka-web/badge.svg?branch=develop)](https://coveralls.io/github/codepitaka/pitaka-web?branch=develop) |
+
+
 ### A Web Blog Service For Code Education  
 
 This web blog service provides a lightening-fast pipeline to create readable and runnable tech-blog posts for elementary code tutors, and a comprehensible and do-able code blog posts for newbie code learners.  
