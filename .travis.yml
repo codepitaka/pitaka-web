@@ -15,7 +15,6 @@ script:
 - golangci-lint run
 - go test -v ./... -covermode=count -coverprofile=coverage.out
 - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
-
 notifications:
   slack: pitakaworkspace:8Pde05x9c4PsdXHp6nWaZMCY
   webhooks: https://coveralls.io/webhook
