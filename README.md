@@ -23,6 +23,8 @@ pitaka-web
 +-- reflex       : 개발 중 웹페이지 auto reload를 위한 설정파일
 +-- go.sum       : package manager validation 파일 [go.mod에 write시, 자동생성]
 +-- .gitignore   : GOPATH로 설정된 .go 폴더의 패키지들을 ignore
++-- .setup       : 최초설정 스크립트
++-- .starter     : 실행 스크립트
 +-- travis.yml   : travis 설정파일
 +-- Makefile     : heroku 설정파일
 +-- Procfile     : heroku 설정파일
@@ -33,5 +35,12 @@ pitaka-web
 - [GO archive](https://golang.org/dl/)
 - [how to download](https://www.quora.com/Whats-the-easiest-way-to-update-Go-programming-language-to-the-latest-version-in-Linux)
 
-### Package Manager: go modules
-- 
+### how to set up
+```
+source .setup
+```
+
+### how to start
+```
+source .starter
+```
