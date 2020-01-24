@@ -15,19 +15,22 @@ Etymologically, pitaka (पिटक) originated from buddhism, which means "bas
 ### File Structure
 ```
 pitaka-web
-+-- src/         : web server 소스파일을 모아둔 폴더
-+-- main.go      : entry 소스파일
-+-- main_test.go : entry 소스 test 파일
-+-- go.mod       : package manager 파일 [go mod init 시 자동생성]
-+-- go.sum       : package manager validation 파일 [go.mod에 write시, 자동생성]
-+-- reflex       : 개발 중 웹페이지 auto reload를 위한 설정파일
-+-- go.sum       : package manager validation 파일 [go.mod에 write시, 자동생성]
-+-- .gitignore   : GOPATH로 설정된 .go 폴더의 패키지들을 ignore
-+-- .setup       : 최초설정 스크립트
-+-- .starter     : 실행 스크립트
-+-- travis.yml   : travis 설정파일
-+-- Makefile     : heroku 설정파일
-+-- Procfile     : heroku 설정파일
++-- src/           : web server 소스파일을 모아둔 폴더
++-- main.go        : entry 소스파일
++-- main_test.go   : entry 소스 test 파일
+
++-- go.mod         : package manager 파일 [go mod init 시 자동생성]
++-- go.sum         : package manager validation 파일 [go.mod에 write시, 자동생성]
+
++-- .setup         : 최초설정 스크립트
++-- .starter       : web실행 스크립트
+
++-- .reflex        : reflex 설정파일
++-- .coveralls.yml : coveralls 설정파일
++-- .gitignore     : ignore 설정파일
++-- travis.yml     : travis 설정파일
++-- Makefile       : heroku 설정파일
++-- Procfile       : heroku 설정파일
 ```
 
 
