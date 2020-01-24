@@ -38,7 +38,7 @@ pitaka-web
 - [GO archive](https://golang.org/dl/)
 - [how to download](https://www.quora.com/Whats-the-easiest-way-to-update-Go-programming-language-to-the-latest-version-in-Linux)
 
-### how to set up
+### how to setup
 ```
 source .setup
 ```
