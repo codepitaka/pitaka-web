@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
 )
 
 func main() {
@@ -73,8 +72,6 @@ func SetupRouter() *gin.Engine {
 			log.Fatal("not ok")
 		}
 		
-		fmt.Println(posts)
-		
 		c.HTML(http.StatusOK, "view", gin.H{
 			"title": "You can view!",
 			"contents": []string {
@@ -99,25 +96,5 @@ func SetupRouter() *gin.Engine {
 		})
 	})
 	
-	r.GET("/someJSON", func(c *gin.Context) {
-		res, err := http.Get("https://pitaka-server-dev.herokuapp.com/posts")
-		if err != nil {
-			panic(err.Error())
-		}
-		if res.StatusCode != http.StatusOK{
-			c.Status(http.StatusServiceUnavailable)
-			return
-		}
-		
-		body, err := ioutil.ReadAll(res.Body)
-		if err != nil {
-			panic(err.Error())
-		}
-		
-		var data interface{}
-		json.Unmarshal(body, &data)
-		
-		c.JSON(http.StatusOK, data)
-	})
 	return r
 }
