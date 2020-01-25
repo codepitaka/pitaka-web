@@ -1,4 +1,4 @@
-module github.com/chullino/pitaka-web
+module github.com/codepitaka/pitaka-web
 
 go 1.13.6
 
@@ -17,6 +17,7 @@ require (
 	github.com/golangci/revgrep v0.0.0-20180812185044-276a5c0a1039 // indirect
 	github.com/gostaticanalysis/analysisutil v0.0.3 // indirect
 	github.com/jirfag/go-printf-func-name v0.0.0-20200119135958-7558a9eaa5af // indirect
+	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
