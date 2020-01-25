@@ -4,6 +4,9 @@ import (
 	"log"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"io/ioutil"
+	"encoding/json"
+	"fmt"
 )
 
 func main() {
@@ -45,6 +48,33 @@ func SetupRouter() *gin.Engine {
 	})
 
 	r.GET("/view", func(c *gin.Context) {
+		res, err := http.Get("https://pitaka-server-dev.herokuapp.com/posts")
+		if err != nil {
+			panic(err.Error())
+		}
+		if res.StatusCode != http.StatusOK{
+			c.Status(http.StatusServiceUnavailable)
+			return
+		}
+		
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			panic(err.Error())
+		}
+		
+		var d map[string]interface{}
+		err = json.Unmarshal(body, &d)
+		if err != nil {
+			panic(err.Error())
+		}
+		
+		posts, ok := d["data"].([]interface{})
+		if !ok {
+			log.Fatal("not ok")
+		}
+		
+		fmt.Println(posts)
+		
 		c.HTML(http.StatusOK, "view", gin.H{
 			"title": "You can view!",
 			"contents": []string {
@@ -53,6 +83,7 @@ func SetupRouter() *gin.Engine {
 				"독자가 특정 버튼을 누르면, 글과 글 사이에서 코딩 창이 딱 튀어나오면 좋겠어요.",
 				"깃헙, gist와 연동되어도 좋을 것 같구요.",
 			},
+			"posts": posts,
 		})
 	})
 
@@ -67,6 +98,26 @@ func SetupRouter() *gin.Engine {
 			},
 		})
 	})
-
+	
+	r.GET("/someJSON", func(c *gin.Context) {
+		res, err := http.Get("https://pitaka-server-dev.herokuapp.com/posts")
+		if err != nil {
+			panic(err.Error())
+		}
+		if res.StatusCode != http.StatusOK{
+			c.Status(http.StatusServiceUnavailable)
+			return
+		}
+		
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			panic(err.Error())
+		}
+		
+		var data interface{}
+		json.Unmarshal(body, &data)
+		
+		c.JSON(http.StatusOK, data)
+	})
 	return r
 }
