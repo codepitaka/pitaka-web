@@ -14,7 +14,7 @@ func SetupRouter() *gin.Engine {
 	
 	// load all templates at once
 	r.LoadHTMLGlob(config.RootDIR + "/src/static/templates/*")
-
+	
 	// routes
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home", gin.H{
@@ -90,4 +90,3 @@ func SetupRouter() *gin.Engine {
 	
 	return r
 }
-
