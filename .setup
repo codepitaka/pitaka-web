@@ -71,7 +71,6 @@ go version
 : ' 
   -(8) 필요한 패키지 설치 -
     reflex: 파일 변경시, 자동으로 서버 재시작하는 auto reload를 위한 패키지.
-	golangci-lint: 린터
 '
 go get github.com/cespare/reflex
 go get github.com/golangci/golangci-lint/cmd/golangci-lint
