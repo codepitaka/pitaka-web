@@ -5,10 +5,39 @@ import (
 	"net/http"
 	"strings"
 	"log"
+	"os"
+	"path/filepath"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/gin-gonic/gin"
 	"net/http/httptest"
     "github.com/stretchr/testify/assert"
 )
+
+func setUp() *gin.Engine{
+	engine := gin.New()
+	engine.Use(gin.Logger())
+	engine.Use(gin.Recovery())
+	engine = SetRouter(engine)
+	
+	var templatePaths []string
+	err := filepath.Walk("../static/templates",
+		func(path string, info os.FileInfo, err error) error {
+			if info.IsDir() {
+				return nil
+			}
+			if err != nil {
+				return err
+			}
+			templatePaths = append(templatePaths, path)
+			return nil
+	})
+	if err != nil {
+		log.Println(err)
+	}
+	engine.LoadHTMLFiles(templatePaths...)
+
+	return engine
+}
 
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
    req, _ := http.NewRequest(method, path, nil)
@@ -18,8 +47,8 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 }
 
 func Test_Routes(t *testing.T) {
-    // Grab router
-    router := SetupRouter()
+    // Setup router
+	router := setUp()
 	
 	// data for test
 	tests := []string {
@@ -33,16 +62,15 @@ func Test_Routes(t *testing.T) {
 		t.Run(test, func(t *testing.T) {
 			// Perform a GET request with that handler.
 			res := performRequest(router, "GET", test)
-			// Assert we encoded correctly,
-			// the request gives a 200
+			// Assert we encoded correctly, the request gives a 200
 			assert.Equal(t, http.StatusOK, res.Code)
 		})
 	}
 }
 
 func Test_All_Routes_Status_200(t *testing.T) {
-    // Grab router
-    router := SetupRouter()
+    // Setup router
+	router := setUp()
 	
 	// data for test
 	tests := []string {
@@ -56,16 +84,15 @@ func Test_All_Routes_Status_200(t *testing.T) {
 		t.Run(test, func(t *testing.T) {
 			// Perform a GET request with that handler.
 			res := performRequest(router, "GET", test)
-			// Assert we encoded correctly,
-			// the request gives a 200
+			// Assert we encoded correctly, the request gives a 200
 			assert.Equal(t, http.StatusOK, res.Code)
 		})
 	}
 }
 
 func Test_HTML_Title(t *testing.T) {
-    // Grab router
-    router := SetupRouter()
+    // Setup router
+	router := setUp()
 	
 	// data for test
 	tests := []struct {

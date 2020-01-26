@@ -1,40 +1,17 @@
 package routes
 
 import (
-	"os"
 	"log"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"io/ioutil"
 	"encoding/json"
 	"github.com/codepitaka/pitaka-web/src/config"
-	"fmt"
 )
 
-func SetupRouter() *gin.Engine {
-	r := gin.Default()
-	
-	//temp print
-	fmt.Println(config.RootDIR)
-	fmt.Println(config.RootDIR2)
-	
-	file, err := os.Open(".")
-    if err != nil {
-        log.Fatalf("failed opening directory: %s", err)
-    }
-    defer file.Close()
- 
-    list,_ := file.Readdirnames(0) // 0 to read all files and folders
-    for _, name := range list {
-        fmt.Println(name)
-    }
-	
-	// load all templates at once
-	r.LoadHTMLGlob("src/static/templates/*")
-	
-	// routes
+func SetRouter(r *gin.Engine) *gin.Engine {	
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "home", gin.H{
+		c.HTML(http.StatusOK, "home.html", gin.H{
 			"title": "Welcome to Pitaka!",
 			"contents": []string {
 				"메인홈 화면에는 추천 글들이 담길 예정입니다.",
@@ -45,7 +22,7 @@ func SetupRouter() *gin.Engine {
 	})
 
 	r.GET("/login", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "login", gin.H{
+		c.HTML(http.StatusOK, "login.html", gin.H{
 			"title": "Please Login!",
 			"contents": []string {
 				"로그인 페이지구요.",
@@ -56,7 +33,7 @@ func SetupRouter() *gin.Engine {
 	})
 	
 	r.GET("/edit", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "edit", gin.H{
+		c.HTML(http.StatusOK, "edit.html", gin.H{
 			"title": "You can edit!",
 			"contents": []string {
 				"글을 에디팅하는 페이지구요.",
@@ -93,7 +70,7 @@ func SetupRouter() *gin.Engine {
 			log.Fatal("not ok")
 		}
 		
-		c.HTML(http.StatusOK, "view", gin.H{
+		c.HTML(http.StatusOK, "view.html", gin.H{
 			"title": "You can view!",
 			"contents": []string {
 				"글을 보는 페이지구요.",
