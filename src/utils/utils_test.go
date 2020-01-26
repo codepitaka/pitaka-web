@@ -7,18 +7,9 @@ import (
 )
 
 func Test_FilesUnder(t *testing.T) {
-	err := os.Mkdir("./testDir", os.FileMode(0522))
-	if err != nil {
-		
-	}
-	_, err = os.Create("./testDir/testFile1")
-	if err != nil {
-		
-	}
-	_, err = os.Create("./testDir/testFile2")
-	if err != nil {
-		
-	}
+	_ = os.Mkdir("./testDir", os.FileMode(0522))
+	_, _ = os.Create("./testDir/testFile1")
+	_, _ = os.Create("./testDir/testFile2")
 	defer os.RemoveAll("./testDir")
 	
 	var filePaths []string = FilesUnder("./testDir")
