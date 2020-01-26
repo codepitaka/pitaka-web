@@ -73,3 +73,4 @@ go version
     reflex: 파일 변경시, 자동으로 서버 재시작하는 auto reload를 위한 패키지.
 '
 go get github.com/cespare/reflex
+go get github.com/golangci/golangci-lint/cmd/golangci-lint
