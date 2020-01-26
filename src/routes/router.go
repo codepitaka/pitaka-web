@@ -15,8 +15,8 @@ func SetupRouter() *gin.Engine {
 	
 	// load all templates at once
 	r.LoadHTMLGlob(config.RootDIR + "/src/static/templates/*")
+	fmt.Println(config.RootDIR2)
 	fmt.Println(config.RootDIR)
-	
 	// routes
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home", gin.H{

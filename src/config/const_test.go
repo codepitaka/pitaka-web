@@ -15,5 +15,5 @@ func Test_URLs(t *testing.T) {
 func Test_RootDIR(t *testing.T) {
 	var _, currentFilePath, _, _ = runtime.Caller(0) 
 	var actualRootDIR = filepath.Dir(filepath.Dir(filepath.Dir(currentFilePath)))
-	// assert.Equal(t, RootDIR, actualRootDIR)
+	assert.Equal(t, RootDIR, actualRootDIR)
 }
