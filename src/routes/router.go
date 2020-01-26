@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"os"
 	"log"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -17,8 +18,19 @@ func SetupRouter() *gin.Engine {
 	fmt.Println(config.RootDIR)
 	fmt.Println(config.RootDIR2)
 	
+	file, err := os.Open(".")
+    if err != nil {
+        log.Fatalf("failed opening directory: %s", err)
+    }
+    defer file.Close()
+ 
+    list,_ := file.Readdirnames(0) // 0 to read all files and folders
+    for _, name := range list {
+        fmt.Println(name)
+    }
+	
 	// load all templates at once
-	r.LoadHTMLGlob(config.RootDIR + "/src/static/templates/*")
+	r.LoadHTMLGlob("src/static/templates/*")
 	
 	// routes
 	r.GET("/", func(c *gin.Context) {
