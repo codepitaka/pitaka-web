@@ -7,7 +7,7 @@ import (
 )
 
 func Test_FilesUnder(t *testing.T) {
-	_ = os.Mkdir("./testDir", os.FileMode(0522))
+	_ = os.Mkdir("./testDir", os.FileMode(0777))
 	_, _ = os.Create("./testDir/testFile1")
 	_, _ = os.Create("./testDir/testFile2")
 	defer os.RemoveAll("./testDir")
