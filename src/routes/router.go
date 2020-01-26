@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"github.com/codepitaka/pitaka-web/src/config"
+	"fmt"
 )
 
 func SetupRouter() *gin.Engine {
@@ -14,6 +15,7 @@ func SetupRouter() *gin.Engine {
 	
 	// load all templates at once
 	r.LoadHTMLGlob(config.RootDIR + "/src/static/templates/*")
+	fmt.Println(config.RootDIR)
 	
 	// routes
 	r.GET("/", func(c *gin.Context) {
