@@ -1,0 +1,14 @@
+{{define "posts"}}
+	<h3>map 전체를 가지고 오려면,</h3>
+	<ul>
+		{{ range $index, $value := .posts }}
+			<li>{{ $index }} {{ $value }}</li>
+		{{ end }}
+	</ul>
+	<h3>특정 key만 가져오려면,</h3>
+	<ul>
+		{{ range $index, $value := .posts }}
+			<li>{{ $index }} {{ $value.title }}</li>
+		{{ end }}
+	</ul>
+{{end}}
