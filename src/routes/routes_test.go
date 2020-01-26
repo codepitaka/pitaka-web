@@ -4,13 +4,12 @@ import (
     "testing"
 	"net/http"
 	"strings"
-	"log"
-	"os"
-	"path/filepath"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
 	"net/http/httptest"
     "github.com/stretchr/testify/assert"
+	"github.com/codepitaka/pitaka-web/src/utils"
+	"log"
 )
 
 func setUp() *gin.Engine{
@@ -19,22 +18,8 @@ func setUp() *gin.Engine{
 	engine.Use(gin.Recovery())
 	engine = SetRouter(engine)
 	
-	var templatePaths []string
-	err := filepath.Walk("../static/templates",
-		func(path string, info os.FileInfo, err error) error {
-			if info.IsDir() {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			templatePaths = append(templatePaths, path)
-			return nil
-	})
-	if err != nil {
-		log.Println(err)
-	}
-	engine.LoadHTMLFiles(templatePaths...)
+	var allTemplates []string = utils.FilesUnder("../static/templates")
+	engine.LoadHTMLFiles(allTemplates...)
 
 	return engine
 }
