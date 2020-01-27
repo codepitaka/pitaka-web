@@ -2,3 +2,4 @@
 .go/
 .key
 coverage.out
+cover.html

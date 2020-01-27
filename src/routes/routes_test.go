@@ -4,11 +4,25 @@ import (
     "testing"
 	"net/http"
 	"strings"
-	"log"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/gin-gonic/gin"
 	"net/http/httptest"
     "github.com/stretchr/testify/assert"
+	"github.com/codepitaka/pitaka-web/src/utils"
+	"log"
 )
+
+func setUp() *gin.Engine{
+	engine := gin.New()
+	engine.Use(gin.Logger())
+	engine.Use(gin.Recovery())
+	engine = SetRouter(engine)
+	
+	var allTemplates []string = utils.FilesUnder("../static/templates")
+	engine.LoadHTMLFiles(allTemplates...)
+
+	return engine
+}
 
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
    req, _ := http.NewRequest(method, path, nil)
@@ -18,8 +32,8 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 }
 
 func Test_Routes(t *testing.T) {
-    // Grab router
-    router := SetupRouter()
+    // Setup router
+	router := setUp()
 	
 	// data for test
 	tests := []string {
@@ -33,16 +47,15 @@ func Test_Routes(t *testing.T) {
 		t.Run(test, func(t *testing.T) {
 			// Perform a GET request with that handler.
 			res := performRequest(router, "GET", test)
-			// Assert we encoded correctly,
-			// the request gives a 200
+			// Assert we encoded correctly, the request gives a 200
 			assert.Equal(t, http.StatusOK, res.Code)
 		})
 	}
 }
 
 func Test_All_Routes_Status_200(t *testing.T) {
-    // Grab router
-    router := SetupRouter()
+    // Setup router
+	router := setUp()
 	
 	// data for test
 	tests := []string {
@@ -56,16 +69,15 @@ func Test_All_Routes_Status_200(t *testing.T) {
 		t.Run(test, func(t *testing.T) {
 			// Perform a GET request with that handler.
 			res := performRequest(router, "GET", test)
-			// Assert we encoded correctly,
-			// the request gives a 200
+			// Assert we encoded correctly, the request gives a 200
 			assert.Equal(t, http.StatusOK, res.Code)
 		})
 	}
 }
 
 func Test_HTML_Title(t *testing.T) {
-    // Grab router
-    router := SetupRouter()
+    // Setup router
+	router := setUp()
 	
 	// data for test
 	tests := []struct {
