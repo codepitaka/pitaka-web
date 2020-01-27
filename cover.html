@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/codepitaka/pitaka-web/src/routes/routes.go (76.0%)</option>
+				
+				<option value="file1">github.com/codepitaka/pitaka-web/src/utils/utils.go (81.8%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">no coverage</span>
+				<span class="cov1">low coverage</span>
+				<span class="cov2">*</span>
+				<span class="cov3">*</span>
+				<span class="cov4">*</span>
+				<span class="cov5">*</span>
+				<span class="cov6">*</span>
+				<span class="cov7">*</span>
+				<span class="cov8">*</span>
+				<span class="cov9">*</span>
+				<span class="cov10">high coverage</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package routes
+
+import (
+        "log"
+        "github.com/gin-gonic/gin"
+        "net/http"
+        "io/ioutil"
+        "encoding/json"
+        "github.com/codepitaka/pitaka-web/src/config"
+)
+
+func SetRouter(r *gin.Engine) *gin.Engine <span class="cov10" title="3">{        
+        r.GET("/", func(c *gin.Context) </span><span class="cov10" title="3">{
+                c.HTML(http.StatusOK, "home.html", gin.H{
+                        "title": "Welcome to Pitaka!",
+                        "contents": []string {
+                                "메인홈 화면에는 추천 글들이 담길 예정입니다.",
+                                "추천 code snippet들이 담길 예정입니다.",
+                                "깃헙, gist와 연동되어도 좋을 것 같구요.",
+                        },
+                })
+        }</span>)
+
+        <span class="cov10" title="3">r.GET("/login", func(c *gin.Context) </span><span class="cov10" title="3">{
+                c.HTML(http.StatusOK, "login.html", gin.H{
+                        "title": "Please Login!",
+                        "contents": []string {
+                                "로그인 페이지구요.",
+                                "계정관련작업은 여기서 합니다.",
+                                "비밀번호 찾기라든가, 계정 생성이라든가 등등.",
+                        },
+                })
+        }</span>)
+        
+        <span class="cov10" title="3">r.GET("/edit", func(c *gin.Context) </span><span class="cov10" title="3">{
+                c.HTML(http.StatusOK, "edit.html", gin.H{
+                        "title": "You can edit!",
+                        "contents": []string {
+                                "글을 에디팅하는 페이지구요.",
+                                "WYSIWYG 스타일로 만들 예정입니다.",
+                                "코드 스니펫 넣는 자리도 필요할 것이구요.",
+                                "기본적으로 수행해야하는 작업들을 적어둔 파일도 넣을 수 있도록 하면 좋을 듯 싶구요.",
+                        },
+                })
+        }</span>)
+
+        <span class="cov10" title="3">r.GET("/view", func(c *gin.Context) </span><span class="cov10" title="3">{
+                res, err := http.Get(config.DevServerURL + "/posts")
+                if err != nil </span><span class="cov0" title="0">{
+                        panic(err.Error())</span>
+                }
+                <span class="cov10" title="3">if res.StatusCode != http.StatusOK</span><span class="cov0" title="0">{
+                        c.Status(http.StatusServiceUnavailable)
+                        return
+                }</span>
+                
+                <span class="cov10" title="3">body, err := ioutil.ReadAll(res.Body)
+                if err != nil </span><span class="cov0" title="0">{
+                        panic(err.Error())</span>
+                }
+                
+                <span class="cov10" title="3">var d map[string]interface{}
+                err = json.Unmarshal(body, &amp;d)
+                if err != nil </span><span class="cov0" title="0">{
+                        panic(err.Error())</span>
+                }
+                
+                <span class="cov10" title="3">posts, ok := d["data"].([]interface{})
+                if !ok </span><span class="cov0" title="0">{
+                        log.Fatal("not ok")
+                }</span>
+                
+                <span class="cov10" title="3">c.HTML(http.StatusOK, "view.html", gin.H{
+                        "title": "You can view!",
+                        "contents": []string {
+                                "글을 보는 페이지구요.",
+                                "WYSIWYG 스타일로 만들 예정입니다.",
+                                "독자가 특정 버튼을 누르면, 글과 글 사이에서 코딩 창이 딱 튀어나오면 좋겠어요.",
+                                "깃헙, gist와 연동되어도 좋을 것 같구요.",
+                        },
+                        "posts": posts,
+                })</span>
+        })
+        
+        <span class="cov10" title="3">return r</span>
+}</pre>
+		
+		<pre class="file" id="file1" style="display: none">package utils
+
+import (
+        "os"
+        "log"
+        "path/filepath"
+)
+
+func FilesUnder(path string) []string<span class="cov1" title="1">{
+        var templates []string
+        err := filepath.Walk(path,
+                func(path string, info os.FileInfo, err error) error </span><span class="cov10" title="3">{
+                        if info.IsDir() </span><span class="cov1" title="1">{
+                                return nil
+                        }</span>
+                        <span class="cov6" title="2">if err != nil </span><span class="cov0" title="0">{
+                                return err
+                        }</span>
+                        <span class="cov6" title="2">templates = append(templates, path)
+                        return nil</span>
+        })
+        <span class="cov1" title="1">if err != nil </span><span class="cov0" title="0">{
+                log.Println(err)
+        }</span>
+        <span class="cov1" title="1">return templates</span>
+}</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
