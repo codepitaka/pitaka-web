@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 )
 
-func FilesUnder(path string) []string{
-	var templates []string
+func FilePathsUnder(path string) []string{
+	var targetPaths []string
 	err := filepath.Walk(path,
 		func(path string, info os.FileInfo, err error) error {
 			if info.IsDir() {
@@ -16,11 +16,11 @@ func FilesUnder(path string) []string{
 			if err != nil {
 				return err
 			}
-			templates = append(templates, path)
+			targetPaths = append(targetPaths, path)
 			return nil
 	})
 	if err != nil {
 		log.Println(err)
 	}
-	return templates
+	return targetPaths
 }
