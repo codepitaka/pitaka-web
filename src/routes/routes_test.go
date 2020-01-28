@@ -101,14 +101,9 @@ func Test_HTML_Title(t *testing.T) {
 		    }
 			
 			// find h1 element text data and validate
-			doc.Find("h1").Each(func(i int, s *goquery.Selection) {
-				// For each item found, get the title, remove newlines & tabs
-				title := strings.TrimSpace(s.Text())
-
-				// Assert we encoded correctly,
-				// the request gives a 200
-				assert.Equal(t, test.title, title)
-			})
+			title := strings.TrimSpace(doc.Find("h1").First().Text())
+			// Assert we entered title correctly,
+			assert.Equal(t, test.title, title)
 		})
 	}
 }
