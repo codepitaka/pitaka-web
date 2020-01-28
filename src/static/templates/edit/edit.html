@@ -22,9 +22,9 @@
 				<input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
 				<input type="button" class="UNDERBAR" value="Underline" onclick="document.execCommand('Underline')" />
 				<input type="button" class="BAR" value="EraseLine" onclick="document.execCommand('StrikeThrough')" />
-				<input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
+				<!-- <input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
 				<input type="button" class="aignCenter" value="가운데 정렬" onclick="document.execCommand('justifycenter')" />
-				<input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" />
+				<input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" /> -->
 			</div>
 			<div>
 				<div class="editorDIV" contenteditable="true">
@@ -32,7 +32,6 @@
 					<h2>WYSIWYG Editor입니다.</h2>
 					<h3>WYSIWYG Editor입니다.</h3>
 					<p>
-						todo. Heading에 대한 추가적인 코드 처리는 필요한 상황입니다.<br>
 						todo. Heading에 대한 추가적인 코드 처리는 필요한 상황입니다.<br>
 						todo. 맨 첫 줄은 Heading처리를 하고, 그 라인을 제목으로 설정하고자 합니다.<br>
 					</p>
@@ -72,6 +71,7 @@
 			<div class="buttons">
 				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
 				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
+				<input type="button" value="publish 하기" onclick="console.log('퍼블리시!')" />
 			</div>
 		</body>
 		<script type="text/javascript">
@@ -115,23 +115,25 @@
 			// 		document.execCommand(name, false, argument);
 			// 	}
 			// }
-			// $(document).ready(function () {
-			// 	$('.editorHTMLDIV').hide();
-			// });
+			
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				document.querySelector('.editorHTMLDIV').style.display = 'none';
+			});
+			
+			//HTML코드로 보기
+			function convertToHTML() {
+				var plainEditorText = document.querySelector('.editorDIV').innerHTML
+				var HTMLEditor = document.querySelector('.editorHTMLDIV')
+				HTMLEditor.textContent = plainEditorText
+				document.querySelector('.editorHTMLDIV').style.display = 'block';
+				document.querySelector('.editorDIV').style.display = 'none';
+			}
 
-			// //HTML코드로 보기
-			// function convertToHTML() {
-			// 	$('.editorHTMLDIV').text($('.editorDIV').html());
-			// 	$('.editorHTMLDIV').show();
-			// 	$('.editorDIV').hide();
-			// }
-
-			// //에디터 화면으로 보기
-			// function convertToEditor() {
-			// 	$('.editorDIV').html($('.editorHTMLDIV').text());
-			// 	$('.editorDIV').show();
-			// 	$('.editorHTMLDIV').hide();
-			// }
+			//에디터 화면으로 보기
+			function convertToEditor() {
+				document.querySelector('.editorHTMLDIV').style.display = 'none';
+				document.querySelector('.editorDIV').style.display = 'block';
+			}
 	    </script>
     </html>
 {{end}}
