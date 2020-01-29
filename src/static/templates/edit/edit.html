@@ -22,15 +22,15 @@
 				<input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
 				<input type="button" class="UNDERBAR" value="Underline" onclick="document.execCommand('Underline')" />
 				<input type="button" class="BAR" value="EraseLine" onclick="document.execCommand('StrikeThrough')" />
-				<!-- <input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
-				<input type="button" class="aignCenter" value="가운데 정렬" onclick="document.execCommand('justifycenter')" />
-				<input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" /> -->
+				<input type="button" value="구글 이미지넣기" onclick="document.getElementById('textdiv').focus(); document.execCommand('insertImage',false,'https://www.google.com.au/images/branding/googleg/1x/googleg_standard_color_128dp.png');">
+				<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
 			</div>
 			<div>
 				<div class="editorDIV" contenteditable="true">
-					<h1>WYSIWYG Editor입니다.</h1>
-					<h2>WYSIWYG Editor입니다.</h2>
-					<h3>WYSIWYG Editor입니다.</h3>
+					<div id="textdiv" name="textdiv" contenteditable="true" ></div>
+					<h1>WYSIWYG Editor입니다.(H1)</h1>
+					<h2>WYSIWYG Editor입니다.(H2)</h2>
+					<h3>WYSIWYG Editor입니다.(H3)</h3>
 					<p>
 						todo. Heading에 대한 추가적인 코드 처리는 필요한 상황입니다.<br>
 						todo. 맨 첫 줄은 Heading처리를 하고, 그 라인을 제목으로 설정하고자 합니다.<br>
@@ -71,7 +71,7 @@
 			<div class="buttons">
 				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
 				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
-				<input type="button" value="publish 하기" onclick="console.log('퍼블리시!')" />
+				<input type="button" value="publish 하기" onclick="publish()" />
 			</div>
 		</body>
 		<script type="text/javascript">
@@ -125,14 +125,29 @@
 				var plainEditorText = document.querySelector('.editorDIV').innerHTML
 				var HTMLEditor = document.querySelector('.editorHTMLDIV')
 				HTMLEditor.textContent = plainEditorText
-				document.querySelector('.editorHTMLDIV').style.display = 'block';
-				document.querySelector('.editorDIV').style.display = 'none';
+				document.querySelector('.editorHTMLDIV').style.display = 'block'
+				document.querySelector('.editorDIV').style.display = 'none'
 			}
 
 			//에디터 화면으로 보기
 			function convertToEditor() {
-				document.querySelector('.editorHTMLDIV').style.display = 'none';
-				document.querySelector('.editorDIV').style.display = 'block';
+				document.querySelector('.editorHTMLDIV').style.display = 'none'
+				document.querySelector('.editorDIV').style.display = 'block'
+			}
+			
+			//퍼블리시 하기
+			function publish(){
+				var plainEditorText = document.querySelector('.editorDIV').innerHTML
+				const publishingPost = {}
+				publishingPost["id"] = "test_id"
+				publishingPost["title"] = "test_title"
+				publishingPost["subtitle"] = "test_subtitle"
+				publishingPost["language"] = "KR"
+				publishingPost["content"] = plainEditorText
+				publishingPost["user_id"] = "user_id"
+				publishingPost["blog_id"] = "blog_id"
+				console.log(publishingPost)
+				alert( '퍼블리시!' )
 			}
 	    </script>
     </html>
