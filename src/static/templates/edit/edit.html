@@ -2,36 +2,41 @@
     <html>
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<style>
-				
-			</style>
+			<link rel="stylesheet" href="css/editor.css">
+			<link rel="stylesheet" media="(max-width:600px)" href="css/editor-2-small.css">
+			<link rel="stylesheet" media="(min-width:601px)" href="css/editor-2-large.css">
 		</head>
 		<body>
 			{{template "header.tmpl" .}}
 			{{template "navBar.tmpl"}}
 			{{template "contents.tmpl" .}}
-			<div class="buttons">
-				<select onchange="document.execCommand('formatBlock',false,this.value)" >
-					<option value="">Title</option>
-					<option value="h1">Title 1</option>
-					<option value="h2">Title 2</option>
-					<option value="h3">Title 3</option>
-				</select>
-				<select onchange="cmd('formatBlock',this.value)">
-					<option value="">Title</option>
-					<option value="<h1>">Title 1</option>
-					<option value="<h2>">Title 2</option>
-					<option value="<h3>">Title 3</option>
-				</select>
-				<input type="button" class="H1" value="H1" onclick="document.execCommand('formatBlock',false,'h1')" />
-				<input type="button" class="BOLD" value="Bold" onclick="document.execCommand('bold')" />
-				<input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
-				<input type="button" class="UNDERBAR" value="Underline" onclick="document.execCommand('Underline')" />
-				<input type="button" class="BAR" value="EraseLine" onclick="document.execCommand('StrikeThrough')" />
-				<input type="button" value="구글 이미지넣기" onclick="document.getElementById('textdiv').focus(); document.execCommand('insertImage',false,'https://www.google.com.au/images/branding/googleg/1x/googleg_standard_color_128dp.png');">
-				<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
+			<div class="controller">
+				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
+				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
+				<input class="publish" type="button" value="publish 하기" onclick="publish()" />
 			</div>
-			<div>
+			<div class="editorContainer">
+				<div class="editorButton">
+					<select onchange="document.execCommand('formatBlock',false,this.value)" >
+						<option value="">Title</option>
+						<option value="h1">Title 1</option>
+						<option value="h2">Title 2</option>
+						<option value="h3">Title 3</option>
+					</select>
+					<select onchange="cmd('formatBlock',this.value)">
+						<option value="">Title</option>
+						<option value="<h1>">Title 1</option>
+						<option value="<h2>">Title 2</option>
+						<option value="<h3>">Title 3</option>
+					</select>
+					<input type="button" class="H1" value="H1" onclick="document.execCommand('formatBlock',false,'h1')" />
+					<input type="button" class="BOLD" value="Bold" onclick="document.execCommand('bold')" />
+					<input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
+					<input type="button" class="UNDERBAR" value="Underline" onclick="document.execCommand('Underline')" />
+					<input type="button" class="BAR" value="EraseLine" onclick="document.execCommand('StrikeThrough')" />
+					<input type="button" value="구글 이미지넣기" onclick="document.getElementById('textdiv').focus(); document.execCommand('insertImage',false,'https://www.google.com.au/images/branding/googleg/1x/googleg_standard_color_128dp.png');">
+					<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
+				</div>
 				<div class="editor" contenteditable="true">
 					<div id="textdiv" name="textdiv" contenteditable="true" ></div>
 					<h1>WYSIWYG Editor입니다.(H1)</h1>
@@ -74,13 +79,8 @@
 						Shift + Enter를 치면 newline처럼 다음 줄로 넘어갑니다.<br>
 					</p>
 				 </div>
-				<div class="editorInnerContent">
+				<div class="editorContent">
 				</div>
-			</div>
-			<div class="buttons">
-				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
-				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
-				<input type="button" value="publish 하기" onclick="publish()" />
 			</div>
 		</body>
 		<script type="text/javascript">
@@ -95,21 +95,21 @@
 			}
 			
 			document.addEventListener("DOMContentLoaded", function(event) { 
-				document.querySelector('.editorInnerContent').style.display = 'none';
+				document.querySelector('.editorContent').style.display = 'none';
 			});
 			
 			//HTML코드로 보기
 			function convertToHTML() {
 				var plainEditorText = document.querySelector('.editor').innerHTML
-				var HTMLEditor = document.querySelector('.editorInnerContent')
+				var HTMLEditor = document.querySelector('.editorContent')
 				HTMLEditor.textContent = plainEditorText
-				document.querySelector('.editorInnerContent').style.display = 'block'
+				document.querySelector('.editorContent').style.display = 'block'
 				document.querySelector('.editor').style.display = 'none'
 			}
 
 			//에디터 화면으로 보기
 			function convertToEditor() {
-				document.querySelector('.editorInnerContent').style.display = 'none'
+				document.querySelector('.editorContent').style.display = 'none'
 				document.querySelector('.editor').style.display = 'block'
 			}
 			

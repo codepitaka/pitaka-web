@@ -1,0 +1,19 @@
+.editorContainer{
+	border: 1px solid red;
+	width: 100%;
+}
+
+.editor, .editorContent, .editorButton{ 
+	width: 60%;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.controller{
+	border: 1px solid blue;
+	width: 100%;
+}
+
+.publish{
+	float: right;
+}
