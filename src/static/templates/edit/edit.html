@@ -1,5 +1,11 @@
 {{define "edit.html"}}
     <html>
+		<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<style>
+				
+			</style>
+		</head>
 		<body>
 			{{template "header.tmpl" .}}
 			{{template "navBar.tmpl"}}
@@ -26,7 +32,7 @@
 				<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
 			</div>
 			<div>
-				<div class="editorDIV" contenteditable="true">
+				<div class="editor" contenteditable="true">
 					<div id="textdiv" name="textdiv" contenteditable="true" ></div>
 					<h1>WYSIWYG Editor입니다.(H1)</h1>
 					<h2>WYSIWYG Editor입니다.(H2)</h2>
@@ -42,6 +48,10 @@
 						<b>Bold 처리가 가능합니다.</b><br>
 						위의 Bold 버튼을 눌러서 Bold 해제를 할 수 있습니다.<br>
 						물론, Ctrl+b를 통해서 Bold 처리 및 해제를 할 수 있습니다.<br>
+					</p>
+					<p>
+						code처리도 가능합니다.<br><br>
+						<code>console.log("hello world")</code>
 					</p>
 					<p>
 						<em>Italic 처리가 가능합니다.</em><br>
@@ -62,10 +72,9 @@
 					</p>
 					<p>
 						Shift + Enter를 치면 newline처럼 다음 줄로 넘어갑니다.<br>
-						위의 Eraseline 버튼을 눌러서 Eraseline 해제를 할 수 있습니다.<br>
 					</p>
 				 </div>
-				<div class="editorHTMLDIV">
+				<div class="editorInnerContent">
 				</div>
 			</div>
 			<div class="buttons">
@@ -84,60 +93,29 @@
 			  }
 			  clicked = !clicked;
 			}
-			// borto = {
-			// 	tmpEl: document.createElement('div'),
-			// 	/* create element like in jquery with string <tag attribute1 attribute2 /> or <tag attribute1></tag> */
-			// 	htmlToDom: function(htmlEl){
-			// 		borto.tmpEl.innerHTML = htmlEl;
-			// 		return borto.tmpEl.children[0]
-			// 	},
-			// 	wrapSelection: function(htmlEl){
-			// 		var sel = window.getSelection();
-			// 		// In firefox we can select multiple area, so they are multiple range
-			// 		for(var i = sel.rangeCount;i--;){
-			// 			var wrapper = borto.htmlToDom(htmlEl)
-			// 			var range = sel.getRangeAt(i);
-			// 			wrapper.appendChild(range.extractContents());
-			// 			range.insertNode(wrapper);
-			// 		}
-			// 	},
-			// 	command: (name,argument)=>{
-			// 		switch(name){
-			// 			case "createLink":
-			// 				argument = prompt("Quelle est l'adresse du lien ?");
-			// 			break;case 'heading' :
-			// 				borto.wrapSelection('<'+argument+'/>')	
-			// 				return;
-			// 		}
-			// 		if(typeof argument === 'undefined') {
-			// 			argument = '';
-			// 		}
-			// 		document.execCommand(name, false, argument);
-			// 	}
-			// }
 			
 			document.addEventListener("DOMContentLoaded", function(event) { 
-				document.querySelector('.editorHTMLDIV').style.display = 'none';
+				document.querySelector('.editorInnerContent').style.display = 'none';
 			});
 			
 			//HTML코드로 보기
 			function convertToHTML() {
-				var plainEditorText = document.querySelector('.editorDIV').innerHTML
-				var HTMLEditor = document.querySelector('.editorHTMLDIV')
+				var plainEditorText = document.querySelector('.editor').innerHTML
+				var HTMLEditor = document.querySelector('.editorInnerContent')
 				HTMLEditor.textContent = plainEditorText
-				document.querySelector('.editorHTMLDIV').style.display = 'block'
-				document.querySelector('.editorDIV').style.display = 'none'
+				document.querySelector('.editorInnerContent').style.display = 'block'
+				document.querySelector('.editor').style.display = 'none'
 			}
 
 			//에디터 화면으로 보기
 			function convertToEditor() {
-				document.querySelector('.editorHTMLDIV').style.display = 'none'
-				document.querySelector('.editorDIV').style.display = 'block'
+				document.querySelector('.editorInnerContent').style.display = 'none'
+				document.querySelector('.editor').style.display = 'block'
 			}
 			
 			//퍼블리시 하기
 			function publish(){
-				var plainEditorText = document.querySelector('.editorDIV').innerHTML
+				var plainEditorText = document.querySelector('.editor').innerHTML
 				const publishingPost = {}
 				publishingPost["id"] = "test_id"
 				publishingPost["title"] = "test_title"
