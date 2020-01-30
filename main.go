@@ -25,7 +25,7 @@ func addMiddlewares(engine *gin.Engine) *gin.Engine{
 }
 
 func loadTemplates(engine *gin.Engine) *gin.Engine{
-	var allTemplates []string = utils.FilesUnder("src/static/templates")
-	engine.LoadHTMLFiles(allTemplates...)
+	var templatePaths []string = utils.FilePathsUnder("src/static/templates")
+	engine.LoadHTMLFiles(templatePaths...)
 	return engine
 }
