@@ -18,8 +18,8 @@ func setUp() *gin.Engine{
 	engine.Use(gin.Recovery())
 	engine = SetRouter(engine)
 	
-	var allTemplates []string = utils.FilesUnder("../static/templates")
-	engine.LoadHTMLFiles(allTemplates...)
+	var templatePaths []string = utils.FilePathsUnder("../static/templates")
+	engine.LoadHTMLFiles(templatePaths...)
 
 	return engine
 }

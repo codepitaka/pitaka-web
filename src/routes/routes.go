@@ -9,8 +9,8 @@ import (
 	"github.com/codepitaka/pitaka-web/src/config"
 )
 
-func SetRouter(r *gin.Engine) *gin.Engine {	
-	r.GET("/", func(c *gin.Context) {
+func SetRouter(engineRouter *gin.Engine) *gin.Engine {	
+	engineRouter.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home.html", gin.H{
 			"title": "Welcome to Pitaka!",
 			"contents": []string {
@@ -21,7 +21,7 @@ func SetRouter(r *gin.Engine) *gin.Engine {
 		})
 	})
 
-	r.GET("/login", func(c *gin.Context) {
+	engineRouter.GET("/login", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", gin.H{
 			"title": "Please Login!",
 			"contents": []string {
@@ -32,7 +32,7 @@ func SetRouter(r *gin.Engine) *gin.Engine {
 		})
 	})
 	
-	r.GET("/edit", func(c *gin.Context) {
+	engineRouter.GET("/edit", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "edit.html", gin.H{
 			"title": "You can edit!",
 			"contents": []string {
@@ -44,7 +44,7 @@ func SetRouter(r *gin.Engine) *gin.Engine {
 		})
 	})
 
-	r.GET("/view", func(c *gin.Context) {
+	engineRouter.GET("/view", func(c *gin.Context) {
 		res, err := http.Get(config.DevServerURL + "/posts")
 		if err != nil {
 			panic(err.Error())
@@ -82,5 +82,5 @@ func SetRouter(r *gin.Engine) *gin.Engine {
 		})
 	})
 	
-	return r
+	return engineRouter
 }
