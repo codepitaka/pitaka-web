@@ -41,6 +41,7 @@ func Test_Routes(t *testing.T) {
 		"/login",
 		"/view",
 		"/edit",
+		"/create",
 	}
 	
 	for _, test := range tests {
@@ -63,6 +64,7 @@ func Test_All_Routes_Status_200(t *testing.T) {
 		"/login",
 		"/view",
 		"/edit",
+		"/create",
 	}
 	
 	for _, test := range tests {
@@ -88,6 +90,7 @@ func Test_HTML_Title(t *testing.T) {
 		{"/login", "Please Login!"},
 		{"/view", "You can view!"},
 		{"/edit", "You can edit!"},
+		{"/create", "You can create!"},
 	}
 	
 	for _, test := range tests {
