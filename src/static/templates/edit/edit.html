@@ -38,49 +38,49 @@
 					<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
 				</div>
 				<div class="editor" contenteditable="true">
-					<div id="textdiv" name="textdiv" contenteditable="true" ></div>
-					<h1>WYSIWYG Editor입니다.(H1)</h1>
-					<h2>WYSIWYG Editor입니다.(H2)</h2>
-					<h3>WYSIWYG Editor입니다.(H3)</h3>
-					<p>
-						todo. Heading에 대한 추가적인 코드 처리는 필요한 상황입니다.<br>
-						todo. 맨 첫 줄은 Heading처리를 하고, 그 라인을 제목으로 설정하고자 합니다.<br>
-					</p>
-					<p>
-						에디팅 창에서 보이는 그대로 사람들은 글을 읽을 수 있습니다. 포메팅 단계를 따로 거칠 필요가 없어요.
-					</p>
-					<p>
-						<b>Bold 처리가 가능합니다.</b><br>
-						위의 Bold 버튼을 눌러서 Bold 해제를 할 수 있습니다.<br>
-						물론, Ctrl+b를 통해서 Bold 처리 및 해제를 할 수 있습니다.<br>
-					</p>
-					<p>
-						code처리도 가능합니다.<br><br>
-						<code>console.log("hello world")</code>
-					</p>
-					<p>
-						<em>Italic 처리가 가능합니다.</em><br>
-						위의 Italic 버튼을 눌러서 Italic 해제를 할 수 있습니다.<br>
-						물론, Ctrl+i를 통해서 Italic 처리 및 해제를 할 수 있습니다.<br>
-					</p>
-					<p>
-						<u>Underline 처리가 가능합니다.</u><br>
-						위의 Underline 버튼을 눌러서 Underline 해제를 할 수 있습니다.<br>
-						물론, Ctrl+u를 통해서 Italic 처리 및 해제를 할 수 있습니다.<br>
-					</p>
-					<p>
-						<s>Eraseline 처리가 가능합니다.</s><br>
-						위의 Eraseline 버튼을 눌러서 Eraseline 해제를 할 수 있습니다.<br>
-					</p>
-					<p>
-						Enter를 치면 새로운 paragraph가 생깁니다.<br>
-					</p>
-					<p>
-						Shift + Enter를 치면 newline처럼 다음 줄로 넘어갑니다.<br>
-					</p>
+					<div id="textdiv" name="textdiv" contenteditable="true" >
+						<h1>WYSIWYG Editor입니다.(H1)</h1>
+						<h2>WYSIWYG Editor입니다.(H2)</h2>
+						<h3>WYSIWYG Editor입니다.(H3)</h3>
+						<p>
+							todo. Heading에 대한 추가적인 코드 처리는 필요한 상황입니다.<br>
+							todo. 맨 첫 줄은 Heading처리를 하고, 그 라인을 제목으로 설정하고자 합니다.<br>
+						</p>
+						<p>
+							에디팅 창에서 보이는 그대로 사람들은 글을 읽을 수 있습니다. 포메팅 단계를 따로 거칠 필요가 없어요.
+						</p>
+						<p>
+							<b>Bold 처리가 가능합니다.</b><br>
+							위의 Bold 버튼을 눌러서 Bold 해제를 할 수 있습니다.<br>
+							물론, Ctrl+b를 통해서 Bold 처리 및 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							code처리도 가능합니다.<br><br>
+							<code>console.log("hello world")</code>
+						</p>
+						<p>
+							<em>Italic 처리가 가능합니다.</em><br>
+							위의 Italic 버튼을 눌러서 Italic 해제를 할 수 있습니다.<br>
+							물론, Ctrl+i를 통해서 Italic 처리 및 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							<u>Underline 처리가 가능합니다.</u><br>
+							위의 Underline 버튼을 눌러서 Underline 해제를 할 수 있습니다.<br>
+							물론, Ctrl+u를 통해서 Italic 처리 및 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							<s>Eraseline 처리가 가능합니다.</s><br>
+							위의 Eraseline 버튼을 눌러서 Eraseline 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							Enter를 치면 새로운 paragraph가 생깁니다.<br>
+						</p>
+						<p>
+							Shift + Enter를 치면 newline처럼 다음 줄로 넘어갑니다.<br>
+						</p>
+					</div>
 				 </div>
-				<div class="editorContent">
-				</div>
+				<div class="editorContent"></div>
 			</div>
 		</body>
 		<script type="text/javascript">
@@ -122,8 +122,6 @@
 				publishingPost["subtitle"] = "test_subtitle"
 				publishingPost["language"] = "KR"
 				publishingPost["content"] = plainEditorText
-				publishingPost["user_id"] = "user_id"
-				// publishingPost["blog_id"] = "blog_id"
 				
 				var url = 'https://port-3000-pitaka.run.goorm.io/posts';
 				postData(url, publishingPost)

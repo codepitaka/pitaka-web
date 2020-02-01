@@ -43,6 +43,18 @@ func SetRouter(engineRouter *gin.Engine) *gin.Engine {
 			},
 		})
 	})
+	
+	engineRouter.GET("/create", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "create.html", gin.H{
+			"title": "You can create!",
+			"contents": []string {
+				"글을 생성하는 페이지구요.",
+				"이 버튼을 눌렀으니, 처음에는 라우트가 /create일 거에요.",
+				"하지만, 에디터에 뭐라도 한 글자 쓰면, /posts/:id/edit으로 갈 것이에요.",
+				"왜냐하면, 에디터에 뭐라도 한 글자 쓰면, 자동으로 저장이 되고, post의 id를 부여받기 때문이에요.",
+			},
+		})
+	})
 
 	engineRouter.GET("/view", func(c *gin.Context) {
 		res, err := http.Get(config.DevServerURL + "/posts")
