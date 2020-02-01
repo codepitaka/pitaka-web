@@ -143,7 +143,7 @@
 				publishingPost["language"] = "KR"
 				publishingPost["content"] = editorContent
 				
-				var url = 'https://pitaka-web-page-edit-we5mit4np/posts';
+				var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts';
 				return postData(url, publishingPost)
 						.then(data => {
 							messageSaveCompleted()
@@ -158,7 +158,7 @@
 				const publishingPost = {}
 				publishingPost["content"] = editorContent
 				
-				var url = 'https://pitaka-web-page-edit-we5mit4np/posts/'+postId
+				var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts/'+postId
 				return patchData(url, publishingPost)
 						.then(data => {
 							messageSaveCompleted()
