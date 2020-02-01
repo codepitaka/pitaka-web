@@ -1,0 +1,14 @@
+{{define "post.html"}}
+    {{template "header.tmpl" .}}
+    {{template "navBar.tmpl"}}
+    {{template "contents.tmpl" .}}
+    <div style="margin-left: 3%;">
+        <h2>{{ .post.title }}</h2>
+        <h4>{{ .post.subtitle }}</h4>
+        <p style="margin-top: 2%; margin-bottom: 2%;">{{ .post.content }}</p>
+        <div style="font-style: italic; color:grey">
+            <p>생성: {{ .post.created_at }}</p>
+            <p>수정: {{ .post.updated_at }}</p>
+        </div>
+    </div>
+{{end}}
