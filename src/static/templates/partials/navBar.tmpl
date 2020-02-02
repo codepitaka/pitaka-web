@@ -1,9 +1,16 @@
 {{define "navBar.tmpl"}}
-	<p>
-		&nbsp;
-		<a href="/">home</a>
-		<a href="/login">login</a>
-		<a href="/posts">posts</a>
-		<a href="/edit">edit</a>
-	</p>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+		<ul class="navbar-nav">
+			<a class="navbar-brand" href="/">Pitaka</a>
+			<li class="nav-item" style="margin-right: 5%;">
+			<a class="nav-link" href="/login">login</a>
+			</li>
+			<li class="nav-item" style="margin-right: 5%;">
+			<a class="nav-link" href="/posts=published">posts</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="/edit">edit</a>
+			</li>
+		</ul>
+	</nav>
 {{end}}

@@ -1,14 +1,22 @@
 {{define "post.html"}}
-    {{template "header.tmpl" .}}
-    {{template "navBar.tmpl"}}
-    {{template "contents.tmpl" .}}
-    <div style="margin-left: 3%;">
-        <h2>{{ .post.title }}</h2>
-        <h4>{{ .post.subtitle }}</h4>
-        <p style="margin-top: 2%; margin-bottom: 2%;">{{ .post.content }}</p>
-        <div style="font-style: italic; color:grey">
-            <p>생성: {{ .post.created_at }}</p>
-            <p>수정: {{ .post.updated_at }}</p>
+    <html>
+        <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        </head>
+        <div style="margin-top: 5%; margin-left: 3%;">
+            {{template "header.tmpl" .}}
+            {{template "navBar.tmpl"}}
+            {{template "contents.tmpl" .}}
+            <div style="margin-left: 3%;">
+                <h2>{{ .post.title }}</h2>
+                <h4>{{ .post.subtitle }}</h4>
+                <p style="margin-top: 2%; margin-bottom: 2%;">{{ .post.content }}</p>
+                <div style="font-style: italic; color:grey">
+                    <p>생성: {{ .post.created_at }}</p>
+                    <p>수정: {{ .post.updated_at }}</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </html>
 {{end}}

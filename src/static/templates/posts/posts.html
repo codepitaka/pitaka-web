@@ -1,0 +1,29 @@
+{{define "posts.html"}}
+    <html>
+		<head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		</head>
+		<div style="margin-top: 5%; margin-left: 3%;">
+		{{template "header.tmpl" .}}
+		{{template "navBar.tmpl"}}
+		{{template "contents.tmpl" .}}
+			<a href="/posts={{ .otherType }}" class="btn btn-outline-info">{{ .otherType }}</a>
+			<div style="margin-top: 2%;">
+				{{ range $index, $value := .posts }}
+					<div class="card" style="margin-left: 3%; margin-bottom:2%; width:50%;">
+						<div class="card-header">
+							{{ $value.id }} - 생성: {{ $value.created_at }} / 수정: {{ $value.updated_at}}
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">{{ $value.title }}</h5>
+							<p class="card-text">{{ $value.subtitle }}</p>
+							<a href="/post={{ $value.id }}" class="btn btn-primary">Detail</a>
+						</div>
+					</div>
+				{{ end }}
+			</div>
+			<a href="/posts={{ .otherType }}" class="btn btn-outline-info">{{ .otherType }}</a>
+		</div>
+    </html>
+{{end}}
