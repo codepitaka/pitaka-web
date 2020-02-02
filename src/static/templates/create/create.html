@@ -2,13 +2,9 @@
     <html>
 		<head>
 			<style>
-				p:empty:not(:focus)::before {
-				  content: attr(placeholder);
-				  color:grey;
-				  font-style:italic;
-				}
 			</style>
-			<link rel="stylesheet" href="css/edit/css/editor.css">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="css/create/css/editor.css">
 			<link rel="stylesheet" media="(max-width:600px)" href="css/create/css/editor-2-small.css">
 			<link rel="stylesheet" media="(min-width:601px)" href="css/create/css/editor-2-large.css">
 		</head>
@@ -19,7 +15,7 @@
 			<div id="controller">
 				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
 				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
-				<div id="messageSave" style="display: inline"></div>
+				<div id="saveStatus" style="display: inline"></div>
 				<input id="publish" type="button" value="publish 하기" onclick="publish()" />
 			</div>
 			<div id="editorContainer">
@@ -49,64 +45,13 @@
 			</div>
 		</body>
 		<script>
+			// --- main logic starts ...
+			
 			document.addEventListener("DOMContentLoaded", function(event) { 
-				document.getElementById("editor").innerHTML += '<h1><p placeholder="Title..."></p></h1><p placeholder="postings..."></p>';
-			});
-			document.getElementById("editor").addEventListener("input", delay(handleEditorInputChange, 500), false);
-			
-			//HTML코드로 보기
-			function convertToHTML() {
-				var plainEditorText = document.getElementById('editor').innerHTML
-				var HTMLEditor = document.getElementById('editorContent')
-				HTMLEditor.textContent = plainEditorText
-				document.getElementById('editorContent').style.display = 'block'
-				document.getElementById('editor').style.display = 'none'
-			}
-
-			//에디터 화면으로 보기
-			function convertToEditor() {
-				document.getElementById('editorContent').style.display = 'none'
-				document.getElementById('editor').style.display = 'block'
-			}
-			
-			//퍼블리시 하기
-			function publish(){
-				alert('퍼블리시!')
-			}
-			
-			class Route {
-				constructor(url) {
-					this.init(url)
-				}
+				document.getElementById("editor").innerHTML += '<h1><p placeholder="Title..."></p></h1><p placeholder="postings..."></p>'
+			})
+			document.getElementById("editor").addEventListener("input", delay(handleEditorInputChange, 500), false)
 				
-				init(url){
-					this.route = this.parseRouteFromURL(url)
-				}
-				
-				parseRouteFromURL(url){
-					const urlParts = url.split('/');
-					return urlParts.pop() || urlParts.pop();  // handle potential trailing slash 
-				}
-				
-				setRouteFromURL(url){
-					this.route = this.parseRouteFromURL(url)
-				}
-				
-				getRoute(){
-					return this.route
-				}
-			
-				isPostNewlyCreated(){
-					return this.route == 'create'
-				}
-				
-				isPostEdited(){
-					return this.route == 'edit'
-				}
-			}
-			
-			var route = new Route(document.URL)
-			
 			function delay(fn, ms) {
 			  let timer = 0
 			  return function(...args) {
@@ -114,69 +59,78 @@
 				timer = setTimeout(fn.bind(this, ...args), ms || 0)
 			  }
 			}
-			
+				
 			function handleEditorInputChange(){
-				route.setRouteFromURL(document.URL)
-				if(route.isPostNewlyCreated()){
-					saveAndReturnPostId()
-					.then(postId => 'posts'+"/"+postId+'/'+'edit')
-					.then(newURL => replaceURL({}, newURL))
+				if(isInitialChangeAccordingTo(document.URL)){
+					const editorInput = getEditorInput()
+					saveEditorInputThenChangeURL(editorInput)
 				}
-				else if(route.isPostEdited()){
-					var parts = document.URL.split('/')
-					var postId = parts[4]
-					patchPost(postId)
-					console.log('delayed input: ', document.getElementById("editor").innerHTML)
+				else{
+					const editorInput = getEditorInput()
+					const postId = getPostId()
+					saveEditorInput(editorInput, postId)
 				}
-			}
-
-			function replaceURL(state={}, newURL){
-				history.replaceState(state, null, newURL)
 			}
 			
-			function saveAndReturnPostId(){
-				messageSaveInProcess()
-				var editorContent = document.getElementById("editor").innerHTML
+			function publish(){
+				if(isInitialChangeAccordingTo(document.URL)){
+					alert('내용이 없습니다!')
+				}
+				else{
+					const editorInput = getEditorInput()
+					const postId = getPostId()
+					saveEditorInputWithPublishedLabel(editorInput, postId)
+				}
+			}
+			
+			// main logic ends. ---
+			
+			function isInitialChangeAccordingTo(url){
+				const urlParts = url.split('/');
+				const terminalPart = urlParts.pop() || urlParts.pop()  // handle potential trailing slash
+				return terminalPart == 'create'
+			}
+			
+			function getEditorInput(){
+				return document.getElementById("editor").innerHTML
+			}
+			
+			function saveEditorInputThenChangeURL(editorInput){
+				messageToUserSaveInProcess()
 				const publishingPost = {}
 				publishingPost["title"] = "test_title"
 				publishingPost["subtitle"] = "test_subtitle"
 				publishingPost["language"] = "KR"
-				publishingPost["content"] = editorContent
+				publishingPost["published"] = false
+				publishingPost["content"] = editorInput
 				
-				var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts';
+				var url = 'https://port-3000-pitaka.run.goorm.io/posts';
 				return postData(url, publishingPost)
 						.then(data => {
-							messageSaveCompleted()
+							messageToUserSaveCompleted()
 							return data.id}) // JSON-string from `response.json()` call
-						.catch(error => console.error(error));
-				
+						.catch(error => {
+							messageToUserSaveError()
+							console.error(error)})
+						.then(postId => '/post='+postId+'/'+'edit')
+						.then(newURL => replaceURL({}, newURL))
 			}
 			
-			function patchPost(postId){
-				messageSaveInProcess()
-				var editorContent = document.getElementById("editor").innerHTML
-				const publishingPost = {}
-				publishingPost["content"] = editorContent
-				
-				var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts/'+postId
-				return patchData(url, publishingPost)
-						.then(data => {
-							messageSaveCompleted()
-							return data.id}) // JSON-string from `response.json()` call
-						.catch(error => console.error(error));
+			function messageToUserSaveInProcess() {
+				document.getElementById('saveStatus').innerHTML = 'Saving...'
 			}
 			
-			function messageSaveInProcess() {
-				document.getElementById('messageSave').innerHTML = 'Saving...'
+			function messageToUserSaveCompleted() {
+				document.getElementById('saveStatus').innerHTML = 'Saved!'
+				window.setTimeout(function(){document.getElementById('saveStatus').innerHTML = ''}, 1300);
 			}
 			
-			function messageSaveCompleted() {
-				document.getElementById('messageSave').innerHTML = 'Saved!'
-				window.setTimeout(removeMessageSave, 1300);
+			function messageToUserSaveError() {
+				document.getElementById('saveStatus').innerHTML = "Sorry, Can't save."
 			}
 			
-			function removeMessageSave(){
-				document.getElementById('messageSave').innerHTML = ''
+			function replaceURL(state={}, newURL){
+				history.replaceState(state, null, newURL)
 			}
 			
 			function postData(url = '', data = {}) {
@@ -197,6 +151,29 @@
 				.then(response => response.json()); // parses JSON response into native JavaScript objects 
 			}
 			
+			function getPostId(){
+				var parts = document.URL.split('/')
+				var postIdPart = parts[parts.length - 2]
+				var postId = postIdPart.split('=')[1]
+				return postId
+			}
+			
+			function saveEditorInput(editorInput, postId){
+				messageToUserSaveInProcess()
+				const publishingPost = {}
+				publishingPost["content"] = editorInput
+				
+				var url = 'https://port-3000-pitaka.run.goorm.io/posts/'+postId
+				// var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts/'+postId
+				return patchData(url, publishingPost)
+						.then(data => {
+							messageToUserSaveCompleted()
+							return data.id}) // JSON-string from `response.json()` call
+						.catch(error => {
+							messageToUserSaveError()
+							console.error(error)})
+			}
+			
 			function patchData(url = '', data = {}) {
 			  // Default options are marked with *
 				return fetch(url, {
@@ -213,6 +190,36 @@
 					body: JSON.stringify(data), // body data type must match "Content-Type" header
 				})
 				.then(response => response.json()); // parses JSON response into native JavaScript objects 
+			}
+			
+			function saveEditorInputWithPublishedLabel(editorInput, postId){
+				const publishingPost = {}
+				publishingPost["content"] = editorInput
+				publishingPost["published"] = true
+				
+				var url = 'https://port-3000-pitaka.run.goorm.io/posts/'+postId
+				return patchData(url, publishingPost)
+						.then(redirectToPublishedPost()) // JSON-string from `response.json()` call
+						.catch(error => console.log(error))
+			}
+			
+			function redirectToPublishedPost() { 
+				window.location.href="https://pitaka-jnclz.run.goorm.io"
+			}
+			
+			//HTML코드로 보기
+			function convertToHTML() {
+				var plainEditorText = document.getElementById('editor').innerHTML
+				var HTMLEditor = document.getElementById('editorContent')
+				HTMLEditor.textContent = plainEditorText
+				document.getElementById('editorContent').style.display = 'block'
+				document.getElementById('editor').style.display = 'none'
+			}
+
+			//에디터 화면으로 보기
+			function convertToEditor() {
+				document.getElementById('editorContent').style.display = 'none'
+				document.getElementById('editor').style.display = 'block'
 			}
 		</script>
 	</html>
