@@ -9,14 +9,16 @@ import (
 	"net/http/httptest"
     "github.com/stretchr/testify/assert"
 	"github.com/codepitaka/pitaka-web/src/utils"
+	"github.com/codepitaka/pitaka-web/src/config"
 	"log"
 )
 
 func setUp() *gin.Engine{
+	configurations := config.New()
 	engine := gin.New()
 	engine.Use(gin.Logger())
 	engine.Use(gin.Recovery())
-	engine = SetRouter(engine)
+	engine = SetRouter(engine, configurations)
 	
 	var templatePaths []string = utils.FilePathsUnder("../static/templates")
 	engine.LoadHTMLFiles(templatePaths...)

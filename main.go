@@ -2,16 +2,19 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/codepitaka/pitaka-web/src/config"
 	"github.com/codepitaka/pitaka-web/src/routes"
 	"github.com/codepitaka/pitaka-web/src/utils"
 )
 
 func main() {
+	configurations := config.New()
+	
 	engine := gin.New()
 	engine = addMiddlewares(engine)
 	engine = loadTemplates(engine)
 	engine = loadCSS(engine)
-	engine = routes.SetRouter(engine)
+	engine = routes.SetRouter(engine, configurations)
 	
 	err := engine.Run()
 	if err != nil {

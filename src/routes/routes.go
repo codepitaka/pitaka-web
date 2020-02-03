@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"io/ioutil"
 	"encoding/json"
+	"github.com/codepitaka/pitaka-web/src/config/constants"
 	"github.com/codepitaka/pitaka-web/src/config"
 )
 
-func SetRouter(engineRouter *gin.Engine) *gin.Engine {	
+func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) *gin.Engine {	
 	engineRouter.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home.html", gin.H{
 			"title": "Welcome to Pitaka!",
@@ -53,11 +54,12 @@ func SetRouter(engineRouter *gin.Engine) *gin.Engine {
 				"하지만, 에디터에 뭐라도 한 글자 쓰면, /posts/:id/edit으로 갈 것이에요.",
 				"왜냐하면, 에디터에 뭐라도 한 글자 쓰면, 자동으로 저장이 되고, post의 id를 부여받기 때문이에요.",
 			},
+			"configurations": configurations,
 		})
 	})
 
 	engineRouter.GET("/view", func(c *gin.Context) {
-		res, err := http.Get(config.DevServerURL + "/posts")
+		res, err := http.Get(constants.DevServerURL + "/posts")
 		if err != nil {
 			panic(err.Error())
 		}

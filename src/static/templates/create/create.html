@@ -104,7 +104,7 @@
 				publishingPost["published"] = false
 				publishingPost["content"] = editorInput
 				
-				var url = 'https://port-3000-pitaka.run.goorm.io/posts';
+				var url = {{.configurations.DatabaseURL}} + '/posts';
 				return postData(url, publishingPost)
 						.then(data => {
 							messageToUserSaveCompleted()
@@ -163,7 +163,7 @@
 				const publishingPost = {}
 				publishingPost["content"] = editorInput
 				
-				var url = 'https://port-3000-pitaka.run.goorm.io/posts/'+postId
+				var url = {{.configurations.DatabaseURL}} +'/posts/'+postId
 				// var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts/'+postId
 				return patchData(url, publishingPost)
 						.then(data => {
@@ -197,7 +197,7 @@
 				publishingPost["content"] = editorInput
 				publishingPost["published"] = true
 				
-				var url = 'https://port-3000-pitaka.run.goorm.io/posts/'+postId
+				var url = {{.configurations.DatabaseURL}} + '/posts/'+postId
 				return patchData(url, publishingPost)
 						.then(redirectToPublishedPost()) // JSON-string from `response.json()` call
 						.catch(error => console.log(error))
