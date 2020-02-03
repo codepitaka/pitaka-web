@@ -10,7 +10,7 @@ func main() {
 	engine := engine.New()
 	
 	engine.AddMiddlewares()
-	engine.LoadStaticFiles()
+	engine.LoadStaticFiles("src/static/templates")
 	engine.SetRoutes(configurations)
 	
 	engine.Run()
