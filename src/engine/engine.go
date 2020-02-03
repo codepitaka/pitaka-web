@@ -38,5 +38,8 @@ func (engineWrapper EngineWrapper) SetRoutes(configurations *config.Configuratio
 }
 
 func (engineWrapper EngineWrapper) Run(){
-	engineWrapper.engine.Run()
+	err := engineWrapper.engine.Run()
+	if err!= nil{
+		panic(err)
+	}
 }
