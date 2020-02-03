@@ -16,10 +16,7 @@ import (
 func setUp() *gin.Engine{
 	configurations := config.New()
 	engine := gin.New()
-	engine.Use(gin.Logger())
-	engine.Use(gin.Recovery())
-	engine = SetRouter(engine, configurations)
-	
+	SetRouter(engine, configurations)
 	var templatePaths []string = utils.FilePathsUnder("../static/templates")
 	engine.LoadHTMLFiles(templatePaths...)
 
