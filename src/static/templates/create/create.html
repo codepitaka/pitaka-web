@@ -16,7 +16,7 @@
 				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
 				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
 				<div id="saveStatus" style="display: inline"></div>
-				<input id="publish" type="button" value="publish 하기" onclick="publish()" />
+				<input id="publish" type="button" value="publish 하기" onclick="publish()" disabled=true/>
 			</div>
 			<div id="editorContainer">
 				<div id="editorButton">
@@ -51,7 +51,7 @@
 				document.getElementById("editor").innerHTML += '<h1><p placeholder="Title..."></p></h1><p placeholder="postings..."></p>'
 			})
 			document.getElementById("editor").addEventListener("input", delay(handleEditorInputChange, 500), false)
-				
+			
 			function delay(fn, ms) {
 			  let timer = 0
 			  return function(...args) {
@@ -70,6 +70,7 @@
 					const postId = getPostId()
 					saveEditorInput(editorInput, postId)
 				}
+				setPublishButtonDisableCondition()
 			}
 			
 			function publish(){
@@ -84,7 +85,6 @@
 			}
 			
 			// main logic ends. ---
-			
 			function isInitialChangeAccordingTo(url){
 				const urlParts = url.split('/');
 				const terminalPart = urlParts.pop() || urlParts.pop()  // handle potential trailing slash
@@ -137,8 +137,8 @@
 			function postData(url = '', data = {}) {
 			  // Default options are marked with *
 				return fetch(url, {
-					method: 'POST', // *GET, POST, PUT, DELETE, etc.
-					// mode: 'cors', // no-cors, cors, *same-origin
+					method: 'POST',
+					mode: 'cors',
 					// cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 					// credentials: 'same-origin', // include, *same-origin, omit
 					headers: {
@@ -178,8 +178,8 @@
 			function patchData(url = '', data = {}) {
 			  // Default options are marked with *
 				return fetch(url, {
-					method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
-					// mode: 'cors', // no-cors, cors, *same-origin
+					method: 'PATCH',
+					mode: 'cors',
 					// cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 					// credentials: 'same-origin', // include, *same-origin, omit
 					headers: {
@@ -191,6 +191,20 @@
 					body: JSON.stringify(data), // body data type must match "Content-Type" header
 				})
 				.then(response => response.json()); // parses JSON response into native JavaScript objects 
+			}
+			
+			function setPublishButtonDisableCondition(){
+				if(isEditorInputEmpty()){
+					document.getElementById('publish').disabled = true
+				}else{
+			    	document.getElementById('publish').disabled = false
+				}
+			}
+			
+			function isEditorInputEmpty(){
+				const editorInput = getEditorInput()
+				console.log(editorInput)
+				return editorInput.length == 0
 			}
 			
 			function saveEditorInputWithPublishedLabel(editorInput, postId){
