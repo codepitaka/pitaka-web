@@ -71,13 +71,6 @@ func SetRouter(engineRouter *gin.Engine) *gin.Engine {
 			log.Fatal("not ok")
 		}
 
-		otherType := ""
-		if c.Param("type") == "published" {
-			otherType = "draft"
-		} else {
-			otherType = "published"
-		}
-
 		c.HTML(http.StatusOK, "posts.html", gin.H{
 			"title": "Posts Page",
 			"contents": []string{
@@ -86,8 +79,8 @@ func SetRouter(engineRouter *gin.Engine) *gin.Engine {
 				"독자가 특정 버튼을 누르면, 글과 글 사이에서 코딩 창이 딱 튀어나오면 좋겠어요.",
 				"깃헙, gist와 연동되어도 좋을 것 같구요.",
 			},
-			"posts":     posts,
-			"otherType": otherType,
+			"posts": posts,
+			"type":  c.Param("type"),
 		})
 	})
 

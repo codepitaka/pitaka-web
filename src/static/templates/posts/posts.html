@@ -6,10 +6,12 @@
 		</head>
 		<div style="margin-top: 5%; margin-left: 3%;">
 		{{template "header.tmpl" .}}
-		{{template "navBar.tmpl"}}
+		{{template "navBar.tmpl" .}}
 		{{template "contents.tmpl" .}}
-			<a href="/posts={{ .otherType }}" class="btn btn-outline-info">{{ .otherType }}</a>
+			<button type="button" id="publishedButton" onclick="location.href='/posts=published'" class="btn btn-outline-info">published</button>
+			<button type="button" id="draftButton" onclick="location.href='/posts=draft'" class="btn btn-outline-info">draft</button>
 			<div style="margin-top: 2%;">
+				<h3 id="postsTitle" style="margin-left: 3%;"></h3>
 				{{ range $index, $value := .posts }}
 					<div class="card" style="margin-left: 3%; margin-bottom:2%; width:50%;">
 						<div class="card-header">
@@ -18,12 +20,23 @@
 						<div class="card-body">
 							<h5 class="card-title">{{ $value.title }}</h5>
 							<p class="card-text">{{ $value.subtitle }}</p>
-							<a href="/post={{ $value.id }}" class="btn btn-primary">Detail</a>
+							<a name="card-detail-button" href="/post={{ $value.id }}/" class="btn btn-primary">Detail</a>
 						</div>
 					</div>
 				{{ end }}
 			</div>
-			<a href="/posts={{ .otherType }}" class="btn btn-outline-info">{{ .otherType }}</a>
 		</div>
+		<script type="text/javascript">
+			if ({{ .type }} === "published") {
+				document.getElementById("publishedButton").disabled = true;
+			} else {
+				document.getElementById("draftButton").disabled = true;
+				const draftDetailButtons = document.getElementsByName("card-detail-button");
+				for (var i = 0; i < draftDetailButtons.length; i++) {
+					draftDetailButtons[i].href += "draft/"
+				}
+			}
+			document.getElementById("postsTitle").textContent = {{ .type }};
+		</script>
     </html>
 {{end}}
