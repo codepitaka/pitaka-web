@@ -40,16 +40,21 @@
 					<input type="button" value="구글 이미지넣기" onclick="document.getElementById('editor').focus(); document.execCommand('insertImage',false,'https://www.google.com.au/images/branding/googleg/1x/googleg_standard_color_128dp.png');">
 					<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
 				</div>
-				<div id="editor" name="textdiv" placeholder="Type something..." contentEditable=true></div>
+				<div id="editor" name="textdiv" placeholder="Type something..."></div>
 				<div id="editorContent"></div>
 			</div>
 		</body>
 		<script>
 			// --- main logic starts ...
+			document.execCommand('defaultParagraphSeparator', false, 'p');
 			
 			document.addEventListener("DOMContentLoaded", function(event) { 
-				document.getElementById("editor").innerHTML += '<h1><p placeholder="Title..."></p></h1><p placeholder="postings..."></p>'
+				document.getElementById("editor").innerHTML += editorTitleInitialContent
+				document.getElementById("editor").innerHTML += editorBodyInitialContent
 			})
+			const editorTitleInitialContent = `<h1><p id="editor-title" placeholder="Title..." contentEditable=true></p></h1>`
+			const editorBodyInitialContent = `<p><p id="editor-body" placeholder="postings..." contentEditable=true></p></p>`
+			
 			document.getElementById("editor").addEventListener("input", delay(handleEditorInputChange, 500), false)
 			
 			function delay(fn, ms) {
@@ -61,6 +66,11 @@
 			}
 				
 			function handleEditorInputChange(){
+				handleSaveToDB()
+				validatePublishButton()
+			}
+			
+			function handleSaveToDB(){
 				if(isInitialChangeAccordingTo(document.URL)){
 					const editorInput = getEditorInput()
 					saveEditorInputThenChangeURL(editorInput)
@@ -70,7 +80,25 @@
 					const postId = getPostId()
 					saveEditorInput(editorInput, postId)
 				}
-				setPublishButtonDisableCondition()
+			}
+			
+			function validatePublishButton(){
+				if(isEditorTitleTextContentEmpty() || isEditorBodyTextContentEmpty()){
+					document.getElementById('publish').disabled = true
+				}
+				else{
+					document.getElementById('publish').disabled = false	
+				}
+			}
+			
+			function isEditorTitleTextContentEmpty(){
+				const editorTitle = document.getElementById("editor-title")
+				return !editorTitle.textContent
+			}
+			
+			function isEditorBodyTextContentEmpty(){
+				const editorBody = document.getElementById("editor-body")
+				return !editorBody.textContent
 			}
 			
 			function publish(){
@@ -193,20 +221,6 @@
 				.then(response => response.json()); // parses JSON response into native JavaScript objects 
 			}
 			
-			function setPublishButtonDisableCondition(){
-				if(isEditorInputEmpty()){
-					document.getElementById('publish').disabled = true
-				}else{
-			    	document.getElementById('publish').disabled = false
-				}
-			}
-			
-			function isEditorInputEmpty(){
-				const editorInput = getEditorInput()
-				console.log(editorInput)
-				return editorInput.length == 0
-			}
-			
 			function saveEditorInputWithPublishedLabel(editorInput, postId){
 				const publishingPost = {}
 				publishingPost["content"] = editorInput
@@ -214,12 +228,12 @@
 				
 				var url = {{.configurations.DatabaseURL}} + '/posts/'+postId
 				return patchData(url, publishingPost)
-						.then(redirectToPublishedPost()) // JSON-string from `response.json()` call
+						.then(data => redirectToPublishedPost(data.id)) // JSON-string from `response.json()` call
 						.catch(error => console.log(error))
 			}
 			
-			function redirectToPublishedPost() { 
-				window.location.href="https://pitaka-jnclz.run.goorm.io"
+			function redirectToPublishedPost(post_id) {
+				window.location.href=`/blog=1/posts=${post_id}`
 			}
 			
 			//HTML코드로 보기
