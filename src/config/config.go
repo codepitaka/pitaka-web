@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"github.com/codepitaka/pitaka-web/src/config/constants"
+	"fmt"
 )
 
 type Configuration struct {
@@ -13,6 +14,7 @@ type Configuration struct {
 func New() *Configuration{
 	c := Configuration{}
 	appmode := getENV("APPMODE")
+	fmt.Println("APPMODE:",appmode)
 	dbURL, e := initializeDatabaseURL(appmode)
 	if e != nil {
 		panic(e)
