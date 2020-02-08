@@ -13,7 +13,7 @@ import (
 	"log"
 )
 
-func setUp() *gin.Engine{
+func setUp() *gin.Engine{	
 	configurations := config.New()
 	engine := gin.New()
 	SetRouter(engine, configurations)

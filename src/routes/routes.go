@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"io/ioutil"
 	"encoding/json"
-	"github.com/codepitaka/pitaka-web/src/config/constants"
 	"github.com/codepitaka/pitaka-web/src/config"
 )
 
@@ -62,7 +61,7 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 	})
 
 	engineRouter.GET("/view", func(c *gin.Context) {
-		res, err := http.Get(constants.DevServerURL + "/posts")
+		res, err := http.Get(configurations.DatabaseURL() + "/posts")
 		if err != nil {
 			panic(err.Error())
 		}
@@ -99,4 +98,11 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 			"configurations": configurations,
 		})
 	})
+	
+	// router.GET("/blog/:userid/status", func(c *gin.Context) {
+	// userid := c.Param("userid") 
+	// message := "userid is " + userid
+	// c.String(http.StatusOK, message)
+	// fmt.Println(message)
+	// })
 }
