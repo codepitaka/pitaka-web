@@ -38,6 +38,7 @@ func Test_Routes(t *testing.T) {
 	tests := []string {
 		"/",
 		"/login",
+		"/edit",
 		"/create",
 	}
 	
