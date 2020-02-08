@@ -38,8 +38,6 @@ func Test_Routes(t *testing.T) {
 	tests := []string {
 		"/",
 		"/login",
-		"/view",
-		"/edit",
 		"/create",
 	}
 	
@@ -61,7 +59,6 @@ func Test_All_Routes_Status_200(t *testing.T) {
 	tests := []string {
 		"/",
 		"/login",
-		"/view",
 		"/edit",
 		"/create",
 	}
@@ -87,7 +84,6 @@ func Test_HTML_Title(t *testing.T) {
 	}{
 		{"/", "Welcome to Pitaka!"},
 		{"/login", "Please Login!"},
-		{"/view", "You can view!"},
 		{"/edit", "You can edit!"},
 		{"/create", "You can create!"},
 	}

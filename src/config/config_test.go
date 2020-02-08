@@ -41,7 +41,7 @@ func Test_getENV(t *testing.T) {
 		{"PRD", "PRD"},
 		{"DEV", "DEV"},
 		{"RVW", "RVW"},
-		{"", "LOCAL"},
+		{"LOCAL", "LOCAL"},
 	}
 	
 	currentAPPMODE := os.Getenv("APPMODE")

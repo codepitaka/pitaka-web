@@ -1,11 +1,8 @@
 package routes
 
 import (
-	"log"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"io/ioutil"
-	"encoding/json"
 	"github.com/codepitaka/pitaka-web/src/config"
 )
 
@@ -56,45 +53,6 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 				"하지만, 에디터에 뭐라도 한 글자 쓰면, /posts/:id/edit으로 갈 것이에요.",
 				"왜냐하면, 에디터에 뭐라도 한 글자 쓰면, 자동으로 저장이 되고, post의 id를 부여받기 때문이에요.",
 			},
-			"configurations": configurations,
-		})
-	})
-
-	engineRouter.GET("/view", func(c *gin.Context) {
-		res, err := http.Get(configurations.DatabaseURL() + "/posts")
-		if err != nil {
-			panic(err.Error())
-		}
-		if res.StatusCode != http.StatusOK{
-			c.Status(http.StatusServiceUnavailable)
-			return
-		}
-		
-		body, err := ioutil.ReadAll(res.Body)
-		if err != nil {
-			panic(err.Error())
-		}
-		
-		var d map[string]interface{}
-		err = json.Unmarshal(body, &d)
-		if err != nil {
-			panic(err.Error())
-		}
-		
-		posts, ok := d["data"].([]interface{})
-		if !ok {
-			log.Fatal("not ok")
-		}
-		
-		c.HTML(http.StatusOK, "view.html", gin.H{
-			"title": "You can view!",
-			"contents": []string {
-				"글을 보는 페이지구요.",
-				"WYSIWYG 스타일로 만들 예정입니다.",
-				"독자가 특정 버튼을 누르면, 글과 글 사이에서 코딩 창이 딱 튀어나오면 좋겠어요.",
-				"깃헙, gist와 연동되어도 좋을 것 같구요.",
-			},
-			"posts": posts,
 			"configurations": configurations,
 		})
 	})
