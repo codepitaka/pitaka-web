@@ -16,9 +16,6 @@ func New() *Configuration{
 	c := Configuration{}
 	appmode := getENV("APPMODE")
 	fmt.Println("APPMODE:",appmode)
-	for index, env := range os.Environ() {
-        fmt.Println(index, env)
-    }
 	dbURL, e := initializeDatabaseURL(appmode)
 	if e != nil {
 		panic(e)
