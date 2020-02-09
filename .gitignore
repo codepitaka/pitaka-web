@@ -1,5 +1,7 @@
 # ignore all files in .go
 .go/
 .key
-coverage.out
-cover.html
+/cover.out
+/cover.html
+/coverage.out
+/coverage.html

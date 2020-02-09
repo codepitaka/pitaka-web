@@ -1,31 +1,17 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/codepitaka/pitaka-web/src/routes"
-	"github.com/codepitaka/pitaka-web/src/utils"
+	"github.com/codepitaka/pitaka-web/src/config"
+	"github.com/codepitaka/pitaka-web/src/engine"
 )
 
 func main() {
-	engine := gin.New()
-	engine = addMiddlewares(engine)
-	engine = loadTemplates(engine)
-	engine = routes.SetRouter(engine)
+	configurations := config.New()
+	engine := engine.New()
 	
-	err := engine.Run()
-	if err != nil {
-		panic(err.Error())
-    }
-}
-
-func addMiddlewares(engine *gin.Engine) *gin.Engine{
-	engine.Use(gin.Logger())
-	engine.Use(gin.Recovery())
-	return engine
-}
-
-func loadTemplates(engine *gin.Engine) *gin.Engine{
-	var templatePaths []string = utils.FilePathsUnder("src/static/templates")
-	engine.LoadHTMLFiles(templatePaths...)
-	return engine
+	engine.AddMiddlewares()
+	engine.LoadStaticFiles("src/static/templates")
+	engine.SetRoutes(configurations)
+	
+	engine.Run()
 }
