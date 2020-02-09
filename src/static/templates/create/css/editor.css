@@ -1,0 +1,6 @@
+/*show placeholder inside contentEditable div block*/
+p:empty:not(:focus)::before {
+	content: attr(placeholder);
+	color:grey;
+	font-style:italic;
+}

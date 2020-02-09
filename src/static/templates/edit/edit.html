@@ -1,9 +1,154 @@
 {{define "edit.html"}}
     <html>
-		<div style="margin-top: 5%; margin-left: 3%;">
+		<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="css/edit/css/editor.css">
+			<link rel="stylesheet" media="(max-width:600px)" href="css/edit/css/editor-2-small.css">
+			<link rel="stylesheet" media="(min-width:601px)" href="css/edit/css/editor-2-large.css">
+		</head>
+		<body style="margin-top: 5%; margin-left: 3%;">
 			{{template "header.tmpl" .}}
 			{{template "navBar.tmpl"}}
 			{{template "contents.tmpl" .}}
-		</div>
+			<div class="controller">
+				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
+				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
+				<input class="publish" type="button" value="publish 하기" onclick="publish()" />
+			</div>
+			<div class="editorContainer">
+				<div class="editorButton">
+					<select onchange="document.execCommand('formatBlock',false,this.value)" >
+						<option value="">Title</option>
+						<option value="h1">Title 1</option>
+						<option value="h2">Title 2</option>
+						<option value="h3">Title 3</option>
+					</select>
+					<select onchange="cmd('formatBlock',this.value)">
+						<option value="">Title</option>
+						<option value="<h1>">Title 1</option>
+						<option value="<h2>">Title 2</option>
+						<option value="<h3>">Title 3</option>
+					</select>
+					<input type="button" class="H1" value="H1" onclick="document.execCommand('formatBlock',false,'h1')" />
+					<input type="button" class="BOLD" value="Bold" onclick="document.execCommand('bold')" />
+					<input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
+					<input type="button" class="UNDERBAR" value="Underline" onclick="document.execCommand('Underline')" />
+					<input type="button" class="BAR" value="EraseLine" onclick="document.execCommand('StrikeThrough')" />
+					<input type="button" value="구글 이미지넣기" onclick="document.getElementById('textdiv').focus(); document.execCommand('insertImage',false,'https://www.google.com.au/images/branding/googleg/1x/googleg_standard_color_128dp.png');">
+					<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
+				</div>
+				<div class="editor" contenteditable="true">
+					<div id="textdiv" name="textdiv" contenteditable="true" >
+						<h1>WYSIWYG Editor입니다.(H1)</h1>
+						<h2>WYSIWYG Editor입니다.(H2)</h2>
+						<h3>WYSIWYG Editor입니다.(H3)</h3>
+						<p>
+							todo. Heading에 대한 추가적인 코드 처리는 필요한 상황입니다.<br>
+							todo. 맨 첫 줄은 Heading처리를 하고, 그 라인을 제목으로 설정하고자 합니다.<br>
+						</p>
+						<p>
+							에디팅 창에서 보이는 그대로 사람들은 글을 읽을 수 있습니다. 포메팅 단계를 따로 거칠 필요가 없어요.
+						</p>
+						<p>
+							<b>Bold 처리가 가능합니다.</b><br>
+							위의 Bold 버튼을 눌러서 Bold 해제를 할 수 있습니다.<br>
+							물론, Ctrl+b를 통해서 Bold 처리 및 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							code처리도 가능합니다.<br><br>
+							<code>console.log("hello world")</code>
+						</p>
+						<p>
+							<em>Italic 처리가 가능합니다.</em><br>
+							위의 Italic 버튼을 눌러서 Italic 해제를 할 수 있습니다.<br>
+							물론, Ctrl+i를 통해서 Italic 처리 및 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							<u>Underline 처리가 가능합니다.</u><br>
+							위의 Underline 버튼을 눌러서 Underline 해제를 할 수 있습니다.<br>
+							물론, Ctrl+u를 통해서 Italic 처리 및 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							<s>Eraseline 처리가 가능합니다.</s><br>
+							위의 Eraseline 버튼을 눌러서 Eraseline 해제를 할 수 있습니다.<br>
+						</p>
+						<p>
+							Enter를 치면 새로운 paragraph가 생깁니다.<br>
+						</p>
+						<p>
+							Shift + Enter를 치면 newline처럼 다음 줄로 넘어갑니다.<br>
+						</p>
+					</div>
+				 </div>
+				<div class="editorContent"></div>
+			</div>
+		</body>
+		<script type="text/javascript">
+			clicked = false;
+			cmd = (cmd, arg) => {
+			  if(clicked && cmd === 'formatBlock'){
+				document.execCommand('formatBlock', false, 'p');
+			  } else {
+				document.execCommand(cmd, false, arg);
+			  }
+			  clicked = !clicked;
+			}
+			
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				document.querySelector('.editorContent').style.display = 'none';
+			});
+			
+			//HTML코드로 보기
+			function convertToHTML() {
+				var plainEditorText = document.querySelector('.editor').innerHTML
+				var HTMLEditor = document.querySelector('.editorContent')
+				HTMLEditor.textContent = plainEditorText
+				document.querySelector('.editorContent').style.display = 'block'
+				document.querySelector('.editor').style.display = 'none'
+			}
+
+			//에디터 화면으로 보기
+			function convertToEditor() {
+				document.querySelector('.editorContent').style.display = 'none'
+				document.querySelector('.editor').style.display = 'block'
+			}
+			
+			//퍼블리시 하기
+			function publish(){
+				var plainEditorText = document.querySelector('.editor').innerHTML
+				const publishingPost = {}
+				// publishingPost["id"] = "test_id"
+				publishingPost["title"] = "test_title"
+				publishingPost["subtitle"] = "test_subtitle"
+				publishingPost["language"] = "KR"
+				publishingPost["content"] = plainEditorText
+				
+				var url = {{.configurations.DatabaseURL}} +'/posts/'
+				postData(url, publishingPost)
+				  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+				  .catch(error => console.error(error));
+
+				console.log(publishingPost)
+				alert('퍼블리시!')
+			}
+			
+			function postData(url = '', data = {}) {
+			  // Default options are marked with *
+				return fetch(url, {
+					method: 'POST', // *GET, POST, PUT, DELETE, etc.
+					// mode: 'cors', // no-cors, cors, *same-origin
+					// cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+					// credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+						'Content-Type': 'application/json',
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					// redirect: 'follow', // manual, *follow, error
+					// referrer: 'no-referrer', // no-referrer, *client
+					body: JSON.stringify(data), // body data type must match "Content-Type" header
+				})
+				.then(response => response.json()); // parses JSON response into native JavaScript objects 
+			}
+	    </script>
     </html>
 {{end}}
