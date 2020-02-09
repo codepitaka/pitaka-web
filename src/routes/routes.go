@@ -1,25 +1,17 @@
 package routes
 
 import (
-<<<<<<< HEAD
 	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net/http"
 
-=======
-	"github.com/gin-gonic/gin"
-	"net/http"
->>>>>>> develop
 	"github.com/codepitaka/pitaka-web/src/config"
+	"github.com/codepitaka/pitaka-web/src/config/constants"
 	"github.com/gin-gonic/gin"
 )
 
-<<<<<<< HEAD
-func SetRouter(engineRouter *gin.Engine) *gin.Engine {
-=======
-func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {	
->>>>>>> develop
+func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 	engineRouter.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home.html", gin.H{
 			"title": "Welcome to Pitaka!",
@@ -58,7 +50,7 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 	})
 
 	engineRouter.GET("/posts=:type", func(c *gin.Context) {
-		res, err := http.Get(config.DevServerURL + "/posts/" + c.Param("type"))
+		res, err := http.Get(constants.DevServerURL + "/posts/" + c.Param("type"))
 		if err != nil {
 			panic(err.Error())
 		}
@@ -97,7 +89,7 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 	})
 
 	engineRouter.GET("/post=:id", func(c *gin.Context) {
-		res, err := http.Get(config.DevServerURL + "/posts/" + c.Param("id"))
+		res, err := http.Get(constants.DevServerURL + "/posts/" + c.Param("id"))
 		if err != nil {
 			panic(err.Error())
 		}
@@ -130,11 +122,11 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 			"post": post,
 		})
 	})
-	
+
 	engineRouter.GET("/create", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "create.html", gin.H{
 			"title": "You can create!",
-			"contents": []string {
+			"contents": []string{
 				"글을 생성하는 페이지구요.",
 				"이 버튼을 눌렀으니, 처음에는 라우트가 /create일 거에요.",
 				"하지만, 에디터에 뭐라도 한 글자 쓰면, /posts/:id/edit으로 갈 것이에요.",
@@ -143,9 +135,9 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 			"configurations": configurations,
 		})
 	})
-	
+
 	// router.GET("/blog/:userid/status", func(c *gin.Context) {
-	// userid := c.Param("userid") 
+	// userid := c.Param("userid")
 	// message := "userid is " + userid
 	// c.String(http.StatusOK, message)
 	// fmt.Println(message)
