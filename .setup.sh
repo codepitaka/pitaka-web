@@ -14,21 +14,21 @@ echo "remove complete."
 
 : ' 
   -(2) go 설치 -
-    프로세서 변경: go.1.13.6.[프로세서].src.tar.gz
+    프로세서 변경: go.1.12.16.[프로세서].src.tar.gz
     설치위치 변경: -O flag로 설치위치를 설정변경 가능
 '
 
 echo "downloading go..."
-wget https://dl.google.com/go/go1.13.6.linux-amd64.tar.gz -O /go1.13.6.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.12.16.linux-amd64.tar.gz -O /go1.12.16.linux-amd64.tar.gz
 echo "download complete."
 
 : ' 
   -(3) go 압축해제 -
-    프로세서 변경: go.1.13.6.[프로세서].src.tar.gz
+    프로세서 변경: go.1.12.16.[프로세서].src.tar.gz
 '
 
 echo "unzipping go..."
-sudo tar -C /usr/local -xzf /go1.13.6.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf /go1.12.16.linux-amd64.tar.gz
 echo "unzip complete."
 
 : ' 
@@ -69,9 +69,20 @@ echo "current version of go is,"
 go version
 
 : ' 
-  -(8) 필요한 패키지 설치 -
+  -(8-1) 필요한 패키지 설치 -
     reflex: 파일 변경시, 자동으로 서버 재시작하는 auto reload를 위한 패키지.
 	golangci-lint: 린터 패키지.
 '
+echo "installing reflex, golangci-lint..."
 go get github.com/cespare/reflex
 go get github.com/golangci/golangci-lint/cmd/golangci-lint
+echo "installing reflex, golangci-lint completed."
+
+: '
+  -(8-2) gopherjs 패키지 설치 -
+'
+echo "installing gopherjs..."
+go get -u github.com/gopherjs/gopherjs
+export GOPHERJS_GOROOT="$(go env GOROOT)"  # Also add this line to your .profile or equivalent.
+npm install --global source-map-support
+echo "installing gopherjs completed."

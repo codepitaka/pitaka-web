@@ -57,6 +57,16 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 		})
 	})
 	
+	engineRouter.GET("/vecty", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "vecty.html", gin.H{
+			"title": "You can use vecty!",
+			"contents": []string {
+				"vecty를 사용할 수 있어요.",
+			},
+			"configurations": configurations,
+		})
+	})
+	
 	// router.GET("/blog/:userid/status", func(c *gin.Context) {
 	// userid := c.Param("userid") 
 	// message := "userid is " + userid
