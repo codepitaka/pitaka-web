@@ -1,11 +1,17 @@
 language: go
 go:
-- 1.13.6
+- 1.12.16
 sudo: false
 install:
 - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
 - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
 before_script:
+- sudo add-apt-repository ppa:masterminds/glide && sudo apt-get update
+- sudo apt-get install glide
+- glide install
+- go get -u github.com/gopherjs/gopherjs
+- go get -u github.com/gopherjs/vecty
+- go get -u github.com/honnef.co/go/js
 - go get github.com/axw/gocov/gocov
 - go vet ./...
 - go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
