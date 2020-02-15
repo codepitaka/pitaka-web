@@ -15,9 +15,6 @@ install:
 - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
 before_script:
 - glide install
-- go get github.com/gopherjs/gopherjs
-- go get github.com/gopherjs/vecty
-- go get github.com/honnef.co/go/js
 - go get github.com/axw/gocov/gocov
 - go vet ./...
 - go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
