@@ -18,6 +18,10 @@ before_script:
 - go get github.com/axw/gocov/gocov
 - go env GOPATH
 - ls
+- cd src
+- ls
+- cd ../..
+- ls
 - go vet ./...
 - go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 - go get golang.org/x/tools/cmd/cover
