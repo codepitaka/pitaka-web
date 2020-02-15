@@ -1,7 +1,7 @@
 package main
 
 import (
-	"pitaka-web/src/config"
+	"src/config"
 	"pitaka-web/src/engine"
 )
 
