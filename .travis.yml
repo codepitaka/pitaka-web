@@ -10,9 +10,9 @@ before_install:
   - mkdir /tmp/glide
   - tar --directory=/tmp/glide -xvf /tmp/glide.tar.gz
   - export PATH=$PATH:/tmp/glide/${GLIDE_OS_ARCH}
-install:
-- export GOPATH="${TRAVIS_BUILD_DIR}:$GOPATH"
-- export PATH="${TRAVIS_BUILD_DIR}:$PATH"
+#install:
+#- export GOPATH="${TRAVIS_BUILD_DIR}:$GOPATH"
+#- export PATH="${TRAVIS_BUILD_DIR}:$PATH"
 before_script:
 - glide install
 - go get github.com/axw/gocov/gocov
