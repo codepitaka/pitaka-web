@@ -2,9 +2,9 @@ package engine
 
 import(
 	"github.com/gin-gonic/gin"
-	"github.com/codepitaka/pitaka-web/src/routes"
-	"github.com/codepitaka/pitaka-web/src/utils"
-	"github.com/codepitaka/pitaka-web/src/config"
+	"pitaka-web/src/routes"
+	"pitaka-web/src/utils"
+	"pitaka-web/src/config"
 )
 
 type EngineWrapper struct{

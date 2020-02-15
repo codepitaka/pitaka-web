@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"github.com/codepitaka/pitaka-web/src/config"
+	"pitaka-web/src/config"
 )
 
 func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {	
