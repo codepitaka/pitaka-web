@@ -4,7 +4,7 @@ go:
 go_import_path: pitaka-web
 sudo: false
 before_install:
-  - export PATH="${TRAVIS_BUILD_DIR}:$PATH"
+  - export PATH="${TRAVIS_BUILD_DIR}/vendor:${TRAVIS_BUILD_DIR}:$PATH"
   - GLIDE_OS_ARCH=`go env GOHOSTOS`-`go env GOHOSTARCH`
   - GLIDE_TAG=$(curl -s https://glide.sh/version)
   - GLIDE_LATEST_RELEASE_URL="https://github.com/Masterminds/glide/releases/download/${GLIDE_TAG}/glide-${GLIDE_TAG}-${GLIDE_OS_ARCH}.tar.gz"
