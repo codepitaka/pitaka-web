@@ -8,16 +8,15 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http/httptest"
     "github.com/stretchr/testify/assert"
-	"github.com/codepitaka/pitaka-web/src/utils"
+	"pitaka-web/src/utils"
+	"pitaka-web/src/config"
 	"log"
 )
 
-func setUp() *gin.Engine{
+func setUp() *gin.Engine{	
+	configurations := config.New()
 	engine := gin.New()
-	engine.Use(gin.Logger())
-	engine.Use(gin.Recovery())
-	engine = SetRouter(engine)
-	
+	SetRouter(engine, configurations)
 	var templatePaths []string = utils.FilePathsUnder("../static/templates")
 	engine.LoadHTMLFiles(templatePaths...)
 
@@ -39,8 +38,8 @@ func Test_Routes(t *testing.T) {
 	tests := []string {
 		"/",
 		"/login",
-		"/view",
 		"/edit",
+		"/create",
 	}
 	
 	for _, test := range tests {
@@ -61,8 +60,8 @@ func Test_All_Routes_Status_200(t *testing.T) {
 	tests := []string {
 		"/",
 		"/login",
-		"/view",
 		"/edit",
+		"/create",
 	}
 	
 	for _, test := range tests {
@@ -86,8 +85,8 @@ func Test_HTML_Title(t *testing.T) {
 	}{
 		{"/", "Welcome to Pitaka!"},
 		{"/login", "Please Login!"},
-		{"/view", "You can view!"},
 		{"/edit", "You can edit!"},
+		{"/create", "You can create!"},
 	}
 	
 	for _, test := range tests {
@@ -101,14 +100,9 @@ func Test_HTML_Title(t *testing.T) {
 		    }
 			
 			// find h1 element text data and validate
-			doc.Find("h1").Each(func(i int, s *goquery.Selection) {
-				// For each item found, get the title, remove newlines & tabs
-				title := strings.TrimSpace(s.Text())
-
-				// Assert we encoded correctly,
-				// the request gives a 200
-				assert.Equal(t, test.title, title)
-			})
+			title := strings.TrimSpace(doc.Find("h1").First().Text())
+			// Assert we entered title correctly,
+			assert.Equal(t, test.title, title)
 		})
 	}
 }

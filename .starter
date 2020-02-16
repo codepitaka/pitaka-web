@@ -1,1 +1,1 @@
-reflex $(cat ./.reflex) -- go run main.go
+reflex --verbose --decoration=fancy --sequential -c .reflex.config

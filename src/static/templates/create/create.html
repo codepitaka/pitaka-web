@@ -1,0 +1,255 @@
+{{define "create.html"}}
+    <html>
+		<head>
+			<style>
+			</style>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="css/create/css/editor.css">
+			<link rel="stylesheet" media="(max-width:600px)" href="css/create/css/editor-2-small.css">
+			<link rel="stylesheet" media="(min-width:601px)" href="css/create/css/editor-2-large.css">
+		</head>
+		<body>
+			{{template "header.tmpl" .}}
+			{{template "navBar.tmpl"}}
+			{{template "contents.tmpl" .}}
+			<div id="controller">
+				<input type="button" value="에디터로 보기" onclick="convertToEditor()" />
+				<input type="button" value="HTML로 보기" onclick="convertToHTML()" />
+				<div id="saveStatus" style="display: inline"></div>
+				<input id="publish" type="button" value="publish 하기" onclick="publish()" disabled=true/>
+			</div>
+			<div id="editorContainer">
+				<div id="editorButton">
+					<select onchange="document.execCommand('formatBlock',false,this.value)" >
+						<option value="">Title</option>
+						<option value="h1">Title 1</option>
+						<option value="h2">Title 2</option>
+						<option value="h3">Title 3</option>
+					</select>
+					<select onchange="cmd('formatBlock',this.value)">
+						<option value="">Title</option>
+						<option value="<h1>">Title 1</option>
+						<option value="<h2>">Title 2</option>
+						<option value="<h3>">Title 3</option>
+					</select>
+					<input type="button" class="h1" value="H1" onclick="document.execCommand('formatBlock',false,'h1')" />
+					<input type="button" class="bold" value="Bold" onclick="document.execCommand('bold')" />
+					<input type="button" class="italic" value="Italic" onclick="document.execCommand('Italic')" />
+					<input type="button" class="underline" value="Underline" onclick="document.execCommand('Underline')" />
+					<input type="button" class="eraseline" value="EraseLine" onclick="document.execCommand('StrikeThrough')" />
+					<input type="button" value="구글 이미지넣기" onclick="document.getElementById('editor').focus(); document.execCommand('insertImage',false,'https://www.google.com.au/images/branding/googleg/1x/googleg_standard_color_128dp.png');">
+					<input type="button" value="주소 이미지넣기" onclick="var url = prompt('이미지 주소', 'http://'); if (url) { html = '<img src=\''+url+'\' title=\'image\' />'; document.getElementById('textdiv').focus(); document.execCommand('insertHtml',null, html);}">
+				</div>
+				<div id="editor" name="textdiv" placeholder="Type something..."></div>
+				<div id="editorContent"></div>
+			</div>
+		</body>
+		<script>
+			// --- main logic starts ...
+			document.execCommand('defaultParagraphSeparator', false, 'p');
+			
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				document.getElementById("editor").innerHTML += editorTitleInitialContent
+				document.getElementById("editor").innerHTML += editorBodyInitialContent
+			})
+			const editorTitleInitialContent = `<h1><p id="editor-title" placeholder="Title..." contentEditable=true></p></h1>`
+			const editorBodyInitialContent = `<p><p id="editor-body" placeholder="postings..." contentEditable=true></p></p>`
+			
+			document.getElementById("editor").addEventListener("input", delay(handleEditorInputChange, 500), false)
+			
+			function delay(fn, ms) {
+			  let timer = 0
+			  return function(...args) {
+				clearTimeout(timer)
+				timer = setTimeout(fn.bind(this, ...args), ms || 0)
+			  }
+			}
+				
+			function handleEditorInputChange(){
+				handleSaveToDB()
+				validatePublishButton()
+			}
+			
+			function handleSaveToDB(){
+				if(isInitialChangeAccordingTo(document.URL)){
+					const editorInput = getEditorInput()
+					saveEditorInputThenChangeURL(editorInput)
+				}
+				else{
+					const editorInput = getEditorInput()
+					const postId = getPostId()
+					saveEditorInput(editorInput, postId)
+				}
+			}
+			
+			function validatePublishButton(){
+				if(isEditorTitleTextContentEmpty() || isEditorBodyTextContentEmpty()){
+					document.getElementById('publish').disabled = true
+				}
+				else{
+					document.getElementById('publish').disabled = false	
+				}
+			}
+			
+			function isEditorTitleTextContentEmpty(){
+				const editorTitle = document.getElementById("editor-title")
+				return !editorTitle.textContent
+			}
+			
+			function isEditorBodyTextContentEmpty(){
+				const editorBody = document.getElementById("editor-body")
+				return !editorBody.textContent
+			}
+			
+			function publish(){
+				if(isInitialChangeAccordingTo(document.URL)){
+					alert('내용이 없습니다!')
+				}
+				else{
+					const editorInput = getEditorInput()
+					const postId = getPostId()
+					saveEditorInputWithPublishedLabel(editorInput, postId)
+				}
+			}
+			
+			// main logic ends. ---
+			function isInitialChangeAccordingTo(url){
+				const urlParts = url.split('/');
+				const terminalPart = urlParts.pop() || urlParts.pop()  // handle potential trailing slash
+				return terminalPart == 'create'
+			}
+			
+			function getEditorInput(){
+				return document.getElementById("editor").innerHTML
+			}
+			
+			function saveEditorInputThenChangeURL(editorInput){
+				messageToUserSaveInProcess()
+				const publishingPost = {}
+				publishingPost["title"] = "test_title"
+				publishingPost["subtitle"] = "test_subtitle"
+				publishingPost["language"] = "KR"
+				publishingPost["published"] = false
+				publishingPost["blog_id"] = 1
+				publishingPost["content"] = editorInput
+				
+				var url = {{.configurations.DatabaseURL}} + '/posts';
+				return postData(url, publishingPost)
+						.then(data => {
+							messageToUserSaveCompleted()
+							return data.id}) // JSON-string from `response.json()` call
+						.catch(error => {
+							messageToUserSaveError()
+							console.error(error)})
+						.then(postId => '/post='+postId+'/'+'edit')
+						.then(newURL => replaceURL({}, newURL))
+			}
+			
+			function messageToUserSaveInProcess() {
+				document.getElementById('saveStatus').innerHTML = 'Saving...'
+			}
+			
+			function messageToUserSaveCompleted() {
+				document.getElementById('saveStatus').innerHTML = 'Saved!'
+				window.setTimeout(function(){document.getElementById('saveStatus').innerHTML = ''}, 1300);
+			}
+			
+			function messageToUserSaveError() {
+				document.getElementById('saveStatus').innerHTML = "Sorry, Can't save."
+			}
+			
+			function replaceURL(state={}, newURL){
+				history.replaceState(state, null, newURL)
+			}
+			
+			function postData(url = '', data = {}) {
+			  // Default options are marked with *
+				return fetch(url, {
+					method: 'POST',
+					mode: 'cors',
+					// cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+					// credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+						'Content-Type': 'application/json',
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					// redirect: 'follow', // manual, *follow, error
+					// referrer: 'no-referrer', // no-referrer, *client
+					body: JSON.stringify(data), // body data type must match "Content-Type" header
+				})
+				.then(response => response.json()); // parses JSON response into native JavaScript objects 
+			}
+			
+			function getPostId(){
+				var parts = document.URL.split('/')
+				var postIdPart = parts[parts.length - 2]
+				var postId = postIdPart.split('=')[1]
+				return postId
+			}
+			
+			function saveEditorInput(editorInput, postId){
+				messageToUserSaveInProcess()
+				const publishingPost = {}
+				publishingPost["content"] = editorInput
+				
+				var url = {{.configurations.DatabaseURL}} +'/posts/'+postId
+				// var url = 'https://pitaka-serve-publish-ap-qc2c9q.herokuapp.com/posts/'+postId
+				return patchData(url, publishingPost)
+						.then(data => {
+							messageToUserSaveCompleted()
+							return data.id}) // JSON-string from `response.json()` call
+						.catch(error => {
+							messageToUserSaveError()
+							console.error(error)})
+			}
+			
+			function patchData(url = '', data = {}) {
+			  // Default options are marked with *
+				return fetch(url, {
+					method: 'PATCH',
+					mode: 'cors',
+					// cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+					// credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+						'Content-Type': 'application/json',
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					// redirect: 'follow', // manual, *follow, error
+					// referrer: 'no-referrer', // no-referrer, *client
+					body: JSON.stringify(data), // body data type must match "Content-Type" header
+				})
+				.then(response => response.json()); // parses JSON response into native JavaScript objects 
+			}
+			
+			function saveEditorInputWithPublishedLabel(editorInput, postId){
+				const publishingPost = {}
+				publishingPost["content"] = editorInput
+				publishingPost["published"] = true
+				
+				var url = {{.configurations.DatabaseURL}} + '/posts/'+postId
+				return patchData(url, publishingPost)
+						.then(data => redirectToPublishedPost(data.id)) // JSON-string from `response.json()` call
+						.catch(error => console.log(error))
+			}
+			
+			function redirectToPublishedPost(post_id) {
+				window.location.href=`/blog=1/posts=${post_id}`
+			}
+			
+			//HTML코드로 보기
+			function convertToHTML() {
+				var plainEditorText = document.getElementById('editor').innerHTML
+				var HTMLEditor = document.getElementById('editorContent')
+				HTMLEditor.textContent = plainEditorText
+				document.getElementById('editorContent').style.display = 'block'
+				document.getElementById('editor').style.display = 'none'
+			}
+
+			//에디터 화면으로 보기
+			function convertToEditor() {
+				document.getElementById('editorContent').style.display = 'none'
+				document.getElementById('editor').style.display = 'block'
+			}
+		</script>
+	</html>
+{{end}}
