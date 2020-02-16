@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http/httptest"
     "github.com/stretchr/testify/assert"
-	"github.com/codepitaka/pitaka-web/src/utils"
-	"github.com/codepitaka/pitaka-web/src/config"
+	"pitaka-web/src/utils"
+	"pitaka-web/src/config"
 	"log"
 )
 

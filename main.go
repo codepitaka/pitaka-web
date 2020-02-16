@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/codepitaka/pitaka-web/src/config"
-	"github.com/codepitaka/pitaka-web/src/engine"
+	"pitaka-web/src/config"
+	"pitaka-web/src/engine"
 )
 
 func main() {
