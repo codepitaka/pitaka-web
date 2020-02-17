@@ -9,7 +9,10 @@ import (
 
 func main() {
 	vecty.SetTitle("Hello Vecty!")
-	vecty.RenderInto("#vecty-content",&PageView{})
+	err := vecty.RenderInto("#vecty-content", &PageView{})
+	if err!= nil{
+		panic(err)
+	}
 }
 
 // PageView is our main page component.

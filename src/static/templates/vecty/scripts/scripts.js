@@ -10192,13 +10192,16 @@ $packages["main"] = (function() {
 	sliceType$1 = $sliceType(vecty.MarkupOrChild);
 	ptrType = $ptrType(PageView);
 	main = function() {
-		var _r, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _r, err, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; err = $f.err; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = vecty.SetTitle("Hello Vecty!"); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
 		_r = vecty.RenderInto("#vecty-content", new PageView.ptr(new vecty.Core.ptr($ifaceNil, $ifaceNil, false, false))); /* */ $s = 2; case 2: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_r;
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$panic(err);
+		}
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: main }; } $f._r = _r; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: main }; } $f._r = _r; $f.err = err; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	PageView.ptr.prototype.Render = function() {
 		var _arg, _arg$1, _r, _r$1, p, x, $s, $r;
