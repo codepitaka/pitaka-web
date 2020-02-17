@@ -1,7 +1,10 @@
 {{define "vecty.html"}}
     <html>
 		<body>
-			<div id="foo"></div>
+			{{template "header.tmpl" .}}
+			{{template "navBar.tmpl"}}
+			{{template "contents.tmpl" .}}
+			<div id="vecty-content"></div>
   			<script src="js/scripts.js"></script>
 		</body>
     </html>
