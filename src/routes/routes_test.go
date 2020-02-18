@@ -17,7 +17,7 @@ func setUp() *gin.Engine{
 	configurations := config.New()
 	engine := gin.New()
 	SetRouter(engine, configurations)
-	var templatePaths []string = utils.FilePathsUnder("../static/templates")
+	var templatePaths []string = utils.HTMLTemplatePathsUnder("../static/templates")
 	engine.LoadHTMLFiles(templatePaths...)
 
 	return engine
