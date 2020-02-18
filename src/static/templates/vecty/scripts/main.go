@@ -9,7 +9,10 @@ import (
 
 func main() {
 	vecty.SetTitle("Hello Vecty!")
-	vecty.RenderBody(&PageView{})
+	err := vecty.RenderInto("#vecty-content", &PageView{})
+	if err!= nil{
+		panic(err)
+	}
 }
 
 // PageView is our main page component.
@@ -19,13 +22,11 @@ type PageView struct {
 
 // Render implements the vecty.Component interface.
 func (p *PageView) Render() vecty.ComponentOrHTML {
-	return elem.Body(
-		elem.Div(
-			vecty.Markup(
-				vecty.Style("float", "right"),
-				vecty.Style("background-color", "red"),
-			),
-			vecty.Text("Hello Vecty!"),
+	return elem.Div(
+		vecty.Markup(
+			vecty.Style("float", "left"),
+			vecty.Style("background-color", "red"),
 		),
+		vecty.Text("Hello Vecty!"),
 	)
 }

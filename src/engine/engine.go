@@ -23,16 +23,12 @@ func (engineWrapper EngineWrapper) AddMiddlewares(){
 	engineWrapper.engine.Use(gin.Recovery())
 }
 
-func (engineWrapper EngineWrapper) LoadStaticFiles(path string){
-	//todo loadCSS와 중복된다. templates만 뽑아내지 못한다.
-	var templatePaths []string = utils.FilePathsUnder(path)
-	engineWrapper.engine.LoadHTMLFiles(templatePaths...)
+func (engineWrapper EngineWrapper) LoadStaticFiles(directoryPath string){
+	var htmlTemplatePaths []string = utils.HTMLTemplatePathsUnder(directoryPath)
+	engineWrapper.engine.LoadHTMLFiles(htmlTemplatePaths...)
 	
 	//todo loadTemplate과 중복된다. CSS만 뽑아내지 못한다.
- 	//loadTemplate없이 loadCSS에 있는 내부함수만으로 html까지 제공할 수 있으려나?
-	engineWrapper.engine.Static("/css", path)
-	
-	engineWrapper.engine.Static("/js", "src/static/templates/vecty/scripts")
+	engineWrapper.engine.Static("/static/templates", directoryPath)
 }
 
 func (engineWrapper EngineWrapper) SetRoutes(configurations *config.Configuration){

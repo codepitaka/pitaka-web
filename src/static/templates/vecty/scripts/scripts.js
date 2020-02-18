@@ -8073,11 +8073,11 @@ $packages["syscall/js"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/gopherjs/vecty"] = (function() {
-	var $pkg = {}, $init, reflect, js, Core, Component, Copier, Mounter, Unmounter, Keyer, ComponentOrHTML, RenderSkipper, HTML, List, KeyedList, batchRenderer, ElementMismatchError, InvalidTargetError, jsFunc, jsObject, Event, jsFuncImpl, wrappedObject, EventListener, MarkupOrChild, Applyer, markupFunc, MarkupList, sliceType, sliceType$1, ptrType, sliceType$2, ptrType$1, sliceType$3, sliceType$4, structType, sliceType$5, sliceType$6, sliceType$7, ptrType$2, mapType, mapType$1, mapType$2, mapType$3, ptrType$3, mapType$4, funcType, ptrType$4, funcType$1, batch, isTest, global, undefined$1, Tag, Text, extractHTML, sameType, copyComponent, copyProps, render, renderComponent, mountUnmount, mount, unmount, requestAnimationFrame, RenderBody, renderIntoNode, SetTitle, init, toLower, funcOf, wrapObject, unwrap, replaceNode, apply, Style, Markup;
+$packages["pitaka-web/vendor/github.com/gopherjs/vecty"] = (function() {
+	var $pkg = {}, $init, reflect, js, Core, Component, Copier, Mounter, Unmounter, Keyer, ComponentOrHTML, RenderSkipper, HTML, List, KeyedList, batchRenderer, ElementMismatchError, InvalidTargetError, jsFunc, jsObject, Event, jsFuncImpl, wrappedObject, EventListener, MarkupOrChild, Applyer, markupFunc, MarkupList, sliceType, sliceType$1, ptrType, sliceType$2, ptrType$1, sliceType$3, sliceType$4, structType, sliceType$5, sliceType$6, sliceType$7, ptrType$2, mapType, mapType$1, mapType$2, mapType$3, ptrType$3, mapType$4, funcType, ptrType$4, funcType$1, batch, isTest, global, undefined$1, Tag, Text, extractHTML, sameType, copyComponent, copyProps, render, renderComponent, mountUnmount, mount, unmount, requestAnimationFrame, RenderInto, renderIntoNode, SetTitle, init, toLower, funcOf, wrapObject, unwrap, replaceNode, apply, Style, Markup;
 	reflect = $packages["reflect"];
 	js = $packages["syscall/js"];
-	Core = $pkg.Core = $newType(0, $kindStruct, "vecty.Core", true, "github.com/gopherjs/vecty", true, function(prevRenderComponent_, prevRender_, mounted_, unmounted_) {
+	Core = $pkg.Core = $newType(0, $kindStruct, "vecty.Core", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(prevRenderComponent_, prevRender_, mounted_, unmounted_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.prevRenderComponent = $ifaceNil;
@@ -8091,14 +8091,14 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.mounted = mounted_;
 		this.unmounted = unmounted_;
 	});
-	Component = $pkg.Component = $newType(8, $kindInterface, "vecty.Component", true, "github.com/gopherjs/vecty", true, null);
-	Copier = $pkg.Copier = $newType(8, $kindInterface, "vecty.Copier", true, "github.com/gopherjs/vecty", true, null);
-	Mounter = $pkg.Mounter = $newType(8, $kindInterface, "vecty.Mounter", true, "github.com/gopherjs/vecty", true, null);
-	Unmounter = $pkg.Unmounter = $newType(8, $kindInterface, "vecty.Unmounter", true, "github.com/gopherjs/vecty", true, null);
-	Keyer = $pkg.Keyer = $newType(8, $kindInterface, "vecty.Keyer", true, "github.com/gopherjs/vecty", true, null);
-	ComponentOrHTML = $pkg.ComponentOrHTML = $newType(8, $kindInterface, "vecty.ComponentOrHTML", true, "github.com/gopherjs/vecty", true, null);
-	RenderSkipper = $pkg.RenderSkipper = $newType(8, $kindInterface, "vecty.RenderSkipper", true, "github.com/gopherjs/vecty", true, null);
-	HTML = $pkg.HTML = $newType(0, $kindStruct, "vecty.HTML", true, "github.com/gopherjs/vecty", true, function(node_, namespace_, tag_, text_, innerHTML_, classes_, styles_, dataset_, properties_, attributes_, eventListeners_, children_, key_, keyedChildren_, insertBeforeNode_, lastRenderedChild_) {
+	Component = $pkg.Component = $newType(8, $kindInterface, "vecty.Component", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	Copier = $pkg.Copier = $newType(8, $kindInterface, "vecty.Copier", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	Mounter = $pkg.Mounter = $newType(8, $kindInterface, "vecty.Mounter", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	Unmounter = $pkg.Unmounter = $newType(8, $kindInterface, "vecty.Unmounter", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	Keyer = $pkg.Keyer = $newType(8, $kindInterface, "vecty.Keyer", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	ComponentOrHTML = $pkg.ComponentOrHTML = $newType(8, $kindInterface, "vecty.ComponentOrHTML", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	RenderSkipper = $pkg.RenderSkipper = $newType(8, $kindInterface, "vecty.RenderSkipper", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	HTML = $pkg.HTML = $newType(0, $kindStruct, "vecty.HTML", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(node_, namespace_, tag_, text_, innerHTML_, classes_, styles_, dataset_, properties_, attributes_, eventListeners_, children_, key_, keyedChildren_, insertBeforeNode_, lastRenderedChild_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.node = $ifaceNil;
@@ -8136,8 +8136,8 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.insertBeforeNode = insertBeforeNode_;
 		this.lastRenderedChild = lastRenderedChild_;
 	});
-	List = $pkg.List = $newType(12, $kindSlice, "vecty.List", true, "github.com/gopherjs/vecty", true, null);
-	KeyedList = $pkg.KeyedList = $newType(0, $kindStruct, "vecty.KeyedList", true, "github.com/gopherjs/vecty", true, function(html_, key_) {
+	List = $pkg.List = $newType(12, $kindSlice, "vecty.List", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	KeyedList = $pkg.KeyedList = $newType(0, $kindStruct, "vecty.KeyedList", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(html_, key_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.html = ptrType.nil;
@@ -8147,7 +8147,7 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.html = html_;
 		this.key = key_;
 	});
-	batchRenderer = $pkg.batchRenderer = $newType(0, $kindStruct, "vecty.batchRenderer", true, "github.com/gopherjs/vecty", false, function(batch_, idx_, scheduled_) {
+	batchRenderer = $pkg.batchRenderer = $newType(0, $kindStruct, "vecty.batchRenderer", true, "pitaka-web/vendor/github.com/gopherjs/vecty", false, function(batch_, idx_, scheduled_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.batch = sliceType.nil;
@@ -8159,7 +8159,7 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.idx = idx_;
 		this.scheduled = scheduled_;
 	});
-	ElementMismatchError = $pkg.ElementMismatchError = $newType(0, $kindStruct, "vecty.ElementMismatchError", true, "github.com/gopherjs/vecty", true, function(method_, got_, want_) {
+	ElementMismatchError = $pkg.ElementMismatchError = $newType(0, $kindStruct, "vecty.ElementMismatchError", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(method_, got_, want_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.method = "";
@@ -8171,7 +8171,7 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.got = got_;
 		this.want = want_;
 	});
-	InvalidTargetError = $pkg.InvalidTargetError = $newType(0, $kindStruct, "vecty.InvalidTargetError", true, "github.com/gopherjs/vecty", true, function(method_) {
+	InvalidTargetError = $pkg.InvalidTargetError = $newType(0, $kindStruct, "vecty.InvalidTargetError", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(method_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.method = "";
@@ -8179,9 +8179,9 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		}
 		this.method = method_;
 	});
-	jsFunc = $pkg.jsFunc = $newType(8, $kindInterface, "vecty.jsFunc", true, "github.com/gopherjs/vecty", false, null);
-	jsObject = $pkg.jsObject = $newType(8, $kindInterface, "vecty.jsObject", true, "github.com/gopherjs/vecty", false, null);
-	Event = $pkg.Event = $newType(0, $kindStruct, "vecty.Event", true, "github.com/gopherjs/vecty", true, function(Value_, Target_) {
+	jsFunc = $pkg.jsFunc = $newType(8, $kindInterface, "vecty.jsFunc", true, "pitaka-web/vendor/github.com/gopherjs/vecty", false, null);
+	jsObject = $pkg.jsObject = $newType(8, $kindInterface, "vecty.jsObject", true, "pitaka-web/vendor/github.com/gopherjs/vecty", false, null);
+	Event = $pkg.Event = $newType(0, $kindStruct, "vecty.Event", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(Value_, Target_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Value = new js.Value.ptr(null, false);
@@ -8191,7 +8191,7 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.Value = Value_;
 		this.Target = Target_;
 	});
-	jsFuncImpl = $pkg.jsFuncImpl = $newType(0, $kindStruct, "vecty.jsFuncImpl", true, "github.com/gopherjs/vecty", false, function(f_, goFunc_) {
+	jsFuncImpl = $pkg.jsFuncImpl = $newType(0, $kindStruct, "vecty.jsFuncImpl", true, "pitaka-web/vendor/github.com/gopherjs/vecty", false, function(f_, goFunc_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.f = new js.Func.ptr(new js.Value.ptr(null, false));
@@ -8201,7 +8201,7 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.f = f_;
 		this.goFunc = goFunc_;
 	});
-	wrappedObject = $pkg.wrappedObject = $newType(0, $kindStruct, "vecty.wrappedObject", true, "github.com/gopherjs/vecty", false, function(j_) {
+	wrappedObject = $pkg.wrappedObject = $newType(0, $kindStruct, "vecty.wrappedObject", true, "pitaka-web/vendor/github.com/gopherjs/vecty", false, function(j_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.j = new js.Value.ptr(null, false);
@@ -8209,7 +8209,7 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		}
 		this.j = j_;
 	});
-	EventListener = $pkg.EventListener = $newType(0, $kindStruct, "vecty.EventListener", true, "github.com/gopherjs/vecty", true, function(Name_, Listener_, callPreventDefault_, callStopPropagation_, wrapper_) {
+	EventListener = $pkg.EventListener = $newType(0, $kindStruct, "vecty.EventListener", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(Name_, Listener_, callPreventDefault_, callStopPropagation_, wrapper_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Name = "";
@@ -8225,10 +8225,10 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		this.callStopPropagation = callStopPropagation_;
 		this.wrapper = wrapper_;
 	});
-	MarkupOrChild = $pkg.MarkupOrChild = $newType(8, $kindInterface, "vecty.MarkupOrChild", true, "github.com/gopherjs/vecty", true, null);
-	Applyer = $pkg.Applyer = $newType(8, $kindInterface, "vecty.Applyer", true, "github.com/gopherjs/vecty", true, null);
-	markupFunc = $pkg.markupFunc = $newType(4, $kindFunc, "vecty.markupFunc", true, "github.com/gopherjs/vecty", false, null);
-	MarkupList = $pkg.MarkupList = $newType(0, $kindStruct, "vecty.MarkupList", true, "github.com/gopherjs/vecty", true, function(list_) {
+	MarkupOrChild = $pkg.MarkupOrChild = $newType(8, $kindInterface, "vecty.MarkupOrChild", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	Applyer = $pkg.Applyer = $newType(8, $kindInterface, "vecty.Applyer", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, null);
+	markupFunc = $pkg.markupFunc = $newType(4, $kindFunc, "vecty.markupFunc", true, "pitaka-web/vendor/github.com/gopherjs/vecty", false, null);
+	MarkupList = $pkg.MarkupList = $newType(0, $kindStruct, "vecty.MarkupList", true, "pitaka-web/vendor/github.com/gopherjs/vecty", true, function(list_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.list = sliceType$7.nil;
@@ -9720,27 +9720,6 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		$s = -1; return _r$1;
 		/* */ } return; } if ($f === undefined) { $f = { $blk: requestAnimationFrame }; } $f._r = _r; $f._r$1 = _r$1; $f.callback = callback; $f.cb = cb; $f.$s = $s; $f.$r = $r; return $f;
 	};
-	RenderBody = function(body) {
-		var _r, _r$1, _r$2, _r$3, _selection, body, err, target, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _selection = $f._selection; body = $f.body; err = $f.err; target = $f.target; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = global.Get("document"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_r$1 = _r.Call("querySelector", new sliceType$1([new $String("body")])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		target = _r$1;
-		_r$2 = renderIntoNode("RenderBody", target, body); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		err = _r$2;
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$panic(err);
-		}
-		/* */ if (!isTest) { $s = 4; continue; }
-		/* */ $s = 5; continue;
-		/* if (!isTest) { */ case 4:
-			_r$3 = $select([]); /* */ $s = 6; case 6: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
-			_selection = _r$3;
-		/* } */ case 5:
-		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: RenderBody }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._selection = _selection; $f.body = body; $f.err = err; $f.target = target; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.RenderBody = RenderBody;
 	ElementMismatchError.ptr.prototype.Error = function() {
 		var e;
 		e = this;
@@ -9753,6 +9732,17 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		return "vecty: " + e.method + ": invalid target element is null or undefined";
 	};
 	InvalidTargetError.prototype.Error = function() { return this.$val.Error(); };
+	RenderInto = function(selector, c) {
+		var _r, _r$1, _r$2, c, selector, target, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; c = $f.c; selector = $f.selector; target = $f.target; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = global.Get("document"); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		_r$1 = _r.Call("querySelector", new sliceType$1([new $String(selector)])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		target = _r$1;
+		_r$2 = renderIntoNode("RenderInto", target, c); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		$s = -1; return _r$2;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: RenderInto }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.c = c; $f.selector = selector; $f.target = target; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.RenderInto = RenderInto;
 	renderIntoNode = function(methodName, node, c) {
 		var _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _r$7, _r$8, _r$9, _tuple, _tuple$1, c, cb, doc, expectTag, m, methodName, nextRender, node, ok, pendingMounts, skip, x, x$1, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _r$7 = $f._r$7; _r$8 = $f._r$8; _r$9 = $f._r$9; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; c = $f.c; cb = $f.cb; doc = $f.doc; expectTag = $f.expectTag; m = $f.m; methodName = $f.methodName; nextRender = $f.nextRender; node = $f.node; ok = $f.ok; pendingMounts = $f.pendingMounts; skip = $f.skip; x = $f.x; x$1 = $f.x$1; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -10115,42 +10105,42 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 		return new MarkupList.ptr(m);
 	};
 	$pkg.Markup = Markup;
-	ptrType$2.methods = [{prop: "Context", name: "Context", pkg: "", typ: $funcType([], [ptrType$2], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}];
-	ptrType.methods = [{prop: "Key", name: "Key", pkg: "", typ: $funcType([], [$emptyInterface], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "createNode", name: "createNode", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "reconcileText", name: "reconcileText", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "reconcile", name: "reconcile", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [sliceType$2], false)}, {prop: "reconcileProperties", name: "reconcileProperties", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "removeProperties", name: "removeProperties", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "reconcileChildren", name: "reconcileChildren", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [sliceType$2], false)}, {prop: "removeChildren", name: "removeChildren", pkg: "github.com/gopherjs/vecty", typ: $funcType([sliceType$4], [], false)}, {prop: "firstChild", name: "firstChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [jsObject], false)}, {prop: "nextSibling", name: "nextSibling", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [jsObject], false)}, {prop: "removeChild", name: "removeChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "appendChild", name: "appendChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "insertBefore", name: "insertBefore", pkg: "github.com/gopherjs/vecty", typ: $funcType([jsObject, ptrType], [], false)}, {prop: "Node", name: "Node", pkg: "", typ: $funcType([], [js.Value], false)}];
-	List.methods = [{prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "WithKey", name: "WithKey", pkg: "", typ: $funcType([$emptyInterface], [KeyedList], false)}];
-	KeyedList.methods = [{prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "Key", name: "Key", pkg: "", typ: $funcType([], [$emptyInterface], false)}, {prop: "reconcile", name: "reconcile", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType, ComponentOrHTML], [sliceType$2], false)}, {prop: "remove", name: "remove", pkg: "github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}];
-	ptrType$3.methods = [{prop: "add", name: "add", pkg: "github.com/gopherjs/vecty", typ: $funcType([Component], [], false)}, {prop: "render", name: "render", pkg: "github.com/gopherjs/vecty", typ: $funcType([$Float64], [], false)}];
+	ptrType$2.methods = [{prop: "Context", name: "Context", pkg: "", typ: $funcType([], [ptrType$2], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}];
+	ptrType.methods = [{prop: "Key", name: "Key", pkg: "", typ: $funcType([], [$emptyInterface], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "createNode", name: "createNode", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "reconcileText", name: "reconcileText", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "reconcile", name: "reconcile", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [sliceType$2], false)}, {prop: "reconcileProperties", name: "reconcileProperties", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "removeProperties", name: "removeProperties", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "reconcileChildren", name: "reconcileChildren", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [sliceType$2], false)}, {prop: "removeChildren", name: "removeChildren", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([sliceType$4], [], false)}, {prop: "firstChild", name: "firstChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [jsObject], false)}, {prop: "nextSibling", name: "nextSibling", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [jsObject], false)}, {prop: "removeChild", name: "removeChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "appendChild", name: "appendChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}, {prop: "insertBefore", name: "insertBefore", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([jsObject, ptrType], [], false)}, {prop: "Node", name: "Node", pkg: "", typ: $funcType([], [js.Value], false)}];
+	List.methods = [{prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "WithKey", name: "WithKey", pkg: "", typ: $funcType([$emptyInterface], [KeyedList], false)}];
+	KeyedList.methods = [{prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "Key", name: "Key", pkg: "", typ: $funcType([], [$emptyInterface], false)}, {prop: "reconcile", name: "reconcile", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType, ComponentOrHTML], [sliceType$2], false)}, {prop: "remove", name: "remove", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([ptrType], [], false)}];
+	ptrType$3.methods = [{prop: "add", name: "add", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([Component], [], false)}, {prop: "render", name: "render", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([$Float64], [], false)}];
 	ElementMismatchError.methods = [{prop: "Error", name: "Error", pkg: "", typ: $funcType([], [$String], false)}];
 	InvalidTargetError.methods = [{prop: "Error", name: "Error", pkg: "", typ: $funcType([], [$String], false)}];
 	jsFuncImpl.methods = [{prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Release", name: "Release", pkg: "", typ: $funcType([], [], false)}];
 	wrappedObject.methods = [{prop: "Set", name: "Set", pkg: "", typ: $funcType([$String, $emptyInterface], [], false)}, {prop: "Get", name: "Get", pkg: "", typ: $funcType([$String], [jsObject], false)}, {prop: "Delete", name: "Delete", pkg: "", typ: $funcType([$String], [], false)}, {prop: "Call", name: "Call", pkg: "", typ: $funcType([$String, sliceType$1], [jsObject], true)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Truthy", name: "Truthy", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "Bool", name: "Bool", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "Int", name: "Int", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Float", name: "Float", pkg: "", typ: $funcType([], [$Float64], false)}];
 	ptrType$1.methods = [{prop: "PreventDefault", name: "PreventDefault", pkg: "", typ: $funcType([], [ptrType$1], false)}, {prop: "StopPropagation", name: "StopPropagation", pkg: "", typ: $funcType([], [ptrType$1], false)}, {prop: "Apply", name: "Apply", pkg: "", typ: $funcType([ptrType], [], false)}];
 	markupFunc.methods = [{prop: "Apply", name: "Apply", pkg: "", typ: $funcType([ptrType], [], false)}];
-	MarkupList.methods = [{prop: "Apply", name: "Apply", pkg: "", typ: $funcType([ptrType], [], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}];
-	Core.init("github.com/gopherjs/vecty", [{prop: "prevRenderComponent", name: "prevRenderComponent", embedded: false, exported: false, typ: Component, tag: ""}, {prop: "prevRender", name: "prevRender", embedded: false, exported: false, typ: ComponentOrHTML, tag: ""}, {prop: "mounted", name: "mounted", embedded: false, exported: false, typ: $Bool, tag: ""}, {prop: "unmounted", name: "unmounted", embedded: false, exported: false, typ: $Bool, tag: ""}]);
-	Component.init([{prop: "Context", name: "Context", pkg: "", typ: $funcType([], [ptrType$2], false)}, {prop: "Render", name: "Render", pkg: "", typ: $funcType([], [ComponentOrHTML], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}]);
+	MarkupList.methods = [{prop: "Apply", name: "Apply", pkg: "", typ: $funcType([ptrType], [], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}];
+	Core.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "prevRenderComponent", name: "prevRenderComponent", embedded: false, exported: false, typ: Component, tag: ""}, {prop: "prevRender", name: "prevRender", embedded: false, exported: false, typ: ComponentOrHTML, tag: ""}, {prop: "mounted", name: "mounted", embedded: false, exported: false, typ: $Bool, tag: ""}, {prop: "unmounted", name: "unmounted", embedded: false, exported: false, typ: $Bool, tag: ""}]);
+	Component.init([{prop: "Context", name: "Context", pkg: "", typ: $funcType([], [ptrType$2], false)}, {prop: "Render", name: "Render", pkg: "", typ: $funcType([], [ComponentOrHTML], false)}, {prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}]);
 	Copier.init([{prop: "Copy", name: "Copy", pkg: "", typ: $funcType([], [Component], false)}]);
 	Mounter.init([{prop: "Mount", name: "Mount", pkg: "", typ: $funcType([], [], false)}]);
 	Unmounter.init([{prop: "Unmount", name: "Unmount", pkg: "", typ: $funcType([], [], false)}]);
 	Keyer.init([{prop: "Key", name: "Key", pkg: "", typ: $funcType([], [$emptyInterface], false)}]);
-	ComponentOrHTML.init([{prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}]);
+	ComponentOrHTML.init([{prop: "isComponentOrHTML", name: "isComponentOrHTML", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}, {prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}]);
 	RenderSkipper.init([{prop: "SkipRender", name: "SkipRender", pkg: "", typ: $funcType([Component], [$Bool], false)}]);
-	HTML.init("github.com/gopherjs/vecty", [{prop: "node", name: "node", embedded: false, exported: false, typ: jsObject, tag: ""}, {prop: "namespace", name: "namespace", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "tag", name: "tag", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "text", name: "text", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "innerHTML", name: "innerHTML", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "classes", name: "classes", embedded: false, exported: false, typ: mapType, tag: ""}, {prop: "styles", name: "styles", embedded: false, exported: false, typ: mapType$1, tag: ""}, {prop: "dataset", name: "dataset", embedded: false, exported: false, typ: mapType$1, tag: ""}, {prop: "properties", name: "properties", embedded: false, exported: false, typ: mapType$2, tag: ""}, {prop: "attributes", name: "attributes", embedded: false, exported: false, typ: mapType$2, tag: ""}, {prop: "eventListeners", name: "eventListeners", embedded: false, exported: false, typ: sliceType$3, tag: ""}, {prop: "children", name: "children", embedded: false, exported: false, typ: sliceType$4, tag: ""}, {prop: "key", name: "key", embedded: false, exported: false, typ: $emptyInterface, tag: ""}, {prop: "keyedChildren", name: "keyedChildren", embedded: false, exported: false, typ: mapType$3, tag: ""}, {prop: "insertBeforeNode", name: "insertBeforeNode", embedded: false, exported: false, typ: jsObject, tag: ""}, {prop: "lastRenderedChild", name: "lastRenderedChild", embedded: false, exported: false, typ: ptrType, tag: ""}]);
+	HTML.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "node", name: "node", embedded: false, exported: false, typ: jsObject, tag: ""}, {prop: "namespace", name: "namespace", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "tag", name: "tag", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "text", name: "text", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "innerHTML", name: "innerHTML", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "classes", name: "classes", embedded: false, exported: false, typ: mapType, tag: ""}, {prop: "styles", name: "styles", embedded: false, exported: false, typ: mapType$1, tag: ""}, {prop: "dataset", name: "dataset", embedded: false, exported: false, typ: mapType$1, tag: ""}, {prop: "properties", name: "properties", embedded: false, exported: false, typ: mapType$2, tag: ""}, {prop: "attributes", name: "attributes", embedded: false, exported: false, typ: mapType$2, tag: ""}, {prop: "eventListeners", name: "eventListeners", embedded: false, exported: false, typ: sliceType$3, tag: ""}, {prop: "children", name: "children", embedded: false, exported: false, typ: sliceType$4, tag: ""}, {prop: "key", name: "key", embedded: false, exported: false, typ: $emptyInterface, tag: ""}, {prop: "keyedChildren", name: "keyedChildren", embedded: false, exported: false, typ: mapType$3, tag: ""}, {prop: "insertBeforeNode", name: "insertBeforeNode", embedded: false, exported: false, typ: jsObject, tag: ""}, {prop: "lastRenderedChild", name: "lastRenderedChild", embedded: false, exported: false, typ: ptrType, tag: ""}]);
 	List.init(ComponentOrHTML);
-	KeyedList.init("github.com/gopherjs/vecty", [{prop: "html", name: "html", embedded: false, exported: false, typ: ptrType, tag: ""}, {prop: "key", name: "key", embedded: false, exported: false, typ: $emptyInterface, tag: ""}]);
-	batchRenderer.init("github.com/gopherjs/vecty", [{prop: "batch", name: "batch", embedded: false, exported: false, typ: sliceType, tag: ""}, {prop: "idx", name: "idx", embedded: false, exported: false, typ: mapType$4, tag: ""}, {prop: "scheduled", name: "scheduled", embedded: false, exported: false, typ: $Bool, tag: ""}]);
-	ElementMismatchError.init("github.com/gopherjs/vecty", [{prop: "method", name: "method", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "got", name: "got", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "want", name: "want", embedded: false, exported: false, typ: $String, tag: ""}]);
-	InvalidTargetError.init("github.com/gopherjs/vecty", [{prop: "method", name: "method", embedded: false, exported: false, typ: $String, tag: ""}]);
+	KeyedList.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "html", name: "html", embedded: false, exported: false, typ: ptrType, tag: ""}, {prop: "key", name: "key", embedded: false, exported: false, typ: $emptyInterface, tag: ""}]);
+	batchRenderer.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "batch", name: "batch", embedded: false, exported: false, typ: sliceType, tag: ""}, {prop: "idx", name: "idx", embedded: false, exported: false, typ: mapType$4, tag: ""}, {prop: "scheduled", name: "scheduled", embedded: false, exported: false, typ: $Bool, tag: ""}]);
+	ElementMismatchError.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "method", name: "method", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "got", name: "got", embedded: false, exported: false, typ: $String, tag: ""}, {prop: "want", name: "want", embedded: false, exported: false, typ: $String, tag: ""}]);
+	InvalidTargetError.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "method", name: "method", embedded: false, exported: false, typ: $String, tag: ""}]);
 	jsFunc.init([{prop: "Release", name: "Release", pkg: "", typ: $funcType([], [], false)}]);
 	jsObject.init([{prop: "Bool", name: "Bool", pkg: "", typ: $funcType([], [$Bool], false)}, {prop: "Call", name: "Call", pkg: "", typ: $funcType([$String, sliceType$1], [jsObject], true)}, {prop: "Delete", name: "Delete", pkg: "", typ: $funcType([$String], [], false)}, {prop: "Float", name: "Float", pkg: "", typ: $funcType([], [$Float64], false)}, {prop: "Get", name: "Get", pkg: "", typ: $funcType([$String], [jsObject], false)}, {prop: "Int", name: "Int", pkg: "", typ: $funcType([], [$Int], false)}, {prop: "Set", name: "Set", pkg: "", typ: $funcType([$String, $emptyInterface], [], false)}, {prop: "String", name: "String", pkg: "", typ: $funcType([], [$String], false)}, {prop: "Truthy", name: "Truthy", pkg: "", typ: $funcType([], [$Bool], false)}]);
 	Event.init("", [{prop: "Value", name: "Value", embedded: true, exported: true, typ: js.Value, tag: ""}, {prop: "Target", name: "Target", embedded: false, exported: true, typ: js.Value, tag: ""}]);
-	jsFuncImpl.init("github.com/gopherjs/vecty", [{prop: "f", name: "f", embedded: false, exported: false, typ: js.Func, tag: ""}, {prop: "goFunc", name: "goFunc", embedded: false, exported: false, typ: funcType, tag: ""}]);
-	wrappedObject.init("github.com/gopherjs/vecty", [{prop: "j", name: "j", embedded: false, exported: false, typ: js.Value, tag: ""}]);
-	EventListener.init("github.com/gopherjs/vecty", [{prop: "Name", name: "Name", embedded: false, exported: true, typ: $String, tag: ""}, {prop: "Listener", name: "Listener", embedded: false, exported: true, typ: funcType$1, tag: ""}, {prop: "callPreventDefault", name: "callPreventDefault", embedded: false, exported: false, typ: $Bool, tag: ""}, {prop: "callStopPropagation", name: "callStopPropagation", embedded: false, exported: false, typ: $Bool, tag: ""}, {prop: "wrapper", name: "wrapper", embedded: false, exported: false, typ: jsFunc, tag: ""}]);
-	MarkupOrChild.init([{prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "github.com/gopherjs/vecty", typ: $funcType([], [], false)}]);
+	jsFuncImpl.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "f", name: "f", embedded: false, exported: false, typ: js.Func, tag: ""}, {prop: "goFunc", name: "goFunc", embedded: false, exported: false, typ: funcType, tag: ""}]);
+	wrappedObject.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "j", name: "j", embedded: false, exported: false, typ: js.Value, tag: ""}]);
+	EventListener.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "Name", name: "Name", embedded: false, exported: true, typ: $String, tag: ""}, {prop: "Listener", name: "Listener", embedded: false, exported: true, typ: funcType$1, tag: ""}, {prop: "callPreventDefault", name: "callPreventDefault", embedded: false, exported: false, typ: $Bool, tag: ""}, {prop: "callStopPropagation", name: "callStopPropagation", embedded: false, exported: false, typ: $Bool, tag: ""}, {prop: "wrapper", name: "wrapper", embedded: false, exported: false, typ: jsFunc, tag: ""}]);
+	MarkupOrChild.init([{prop: "isMarkupOrChild", name: "isMarkupOrChild", pkg: "pitaka-web/vendor/github.com/gopherjs/vecty", typ: $funcType([], [], false)}]);
 	Applyer.init([{prop: "Apply", name: "Apply", pkg: "", typ: $funcType([ptrType], [], false)}]);
 	markupFunc.init([ptrType], [], false);
-	MarkupList.init("github.com/gopherjs/vecty", [{prop: "list", name: "list", embedded: false, exported: false, typ: sliceType$7, tag: ""}]);
+	MarkupList.init("pitaka-web/vendor/github.com/gopherjs/vecty", [{prop: "list", name: "list", embedded: false, exported: false, typ: sliceType$7, tag: ""}]);
 	$init = function() {
 		$pkg.$init = function() {};
 		/* */ var $f, $c = false, $s = 0, $r; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -10166,17 +10156,9 @@ $packages["github.com/gopherjs/vecty"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["github.com/gopherjs/vecty/elem"] = (function() {
-	var $pkg = {}, $init, vecty, Body, Div;
-	vecty = $packages["github.com/gopherjs/vecty"];
-	Body = function(markup) {
-		var _r, markup, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; markup = $f.markup; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = vecty.Tag("body", markup); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		$s = -1; return _r;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Body }; } $f._r = _r; $f.markup = markup; $f.$s = $s; $f.$r = $r; return $f;
-	};
-	$pkg.Body = Body;
+$packages["pitaka-web/vendor/github.com/gopherjs/vecty/elem"] = (function() {
+	var $pkg = {}, $init, vecty, Div;
+	vecty = $packages["pitaka-web/vendor/github.com/gopherjs/vecty"];
 	Div = function(markup) {
 		var _r, markup, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; markup = $f.markup; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -10194,11 +10176,11 @@ $packages["github.com/gopherjs/vecty/elem"] = (function() {
 	$pkg.$init = $init;
 	return $pkg;
 })();
-$packages["."] = (function() {
+$packages["main"] = (function() {
 	var $pkg = {}, $init, vecty, elem, PageView, sliceType, sliceType$1, ptrType, main;
-	vecty = $packages["github.com/gopherjs/vecty"];
-	elem = $packages["github.com/gopherjs/vecty/elem"];
-	PageView = $pkg.PageView = $newType(0, $kindStruct, "main.PageView", true, ".", true, function(Core_) {
+	vecty = $packages["pitaka-web/vendor/github.com/gopherjs/vecty"];
+	elem = $packages["pitaka-web/vendor/github.com/gopherjs/vecty/elem"];
+	PageView = $pkg.PageView = $newType(0, $kindStruct, "main.PageView", true, "main", true, function(Core_) {
 		this.$val = this;
 		if (arguments.length === 0) {
 			this.Core = new vecty.Core.ptr($ifaceNil, $ifaceNil, false, false);
@@ -10210,24 +10192,27 @@ $packages["."] = (function() {
 	sliceType$1 = $sliceType(vecty.MarkupOrChild);
 	ptrType = $ptrType(PageView);
 	main = function() {
-		var $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _r, err, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; err = $f.err; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		$r = vecty.SetTitle("Hello Vecty!"); /* */ $s = 1; case 1: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
-		$r = vecty.RenderBody(new PageView.ptr(new vecty.Core.ptr($ifaceNil, $ifaceNil, false, false))); /* */ $s = 2; case 2: if($c) { $c = false; $r = $r.$blk(); } if ($r && $r.$blk !== undefined) { break s; }
+		_r = vecty.RenderInto("#vecty-content", new PageView.ptr(new vecty.Core.ptr($ifaceNil, $ifaceNil, false, false))); /* */ $s = 2; case 2: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		err = _r;
+		if (!($interfaceIsEqual(err, $ifaceNil))) {
+			$panic(err);
+		}
 		$s = -1; return;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: main }; } $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: main }; } $f._r = _r; $f.err = err; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	PageView.ptr.prototype.Render = function() {
-		var _arg, _arg$1, _r, _r$1, _r$2, p, x, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; p = $f.p; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		var _arg, _arg$1, _r, _r$1, p, x, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _arg = $f._arg; _arg$1 = $f._arg$1; _r = $f._r; _r$1 = $f._r$1; p = $f.p; x = $f.x; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
 		p = this;
-		_arg = (x = vecty.Markup(new sliceType([vecty.Style("float", "right"), vecty.Style("background-color", "red")])), new x.constructor.elem(x));
+		_arg = (x = vecty.Markup(new sliceType([vecty.Style("float", "left"), vecty.Style("background-color", "red")])), new x.constructor.elem(x));
 		_r = vecty.Text("Hello Vecty!", new sliceType$1([])); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		_arg$1 = _r;
 		_r$1 = elem.Div(new sliceType$1([_arg, _arg$1])); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_r$2 = elem.Body(new sliceType$1([_r$1])); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		$s = -1; return _r$2;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: PageView.ptr.prototype.Render }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f.p = p; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
+		$s = -1; return _r$1;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: PageView.ptr.prototype.Render }; } $f._arg = _arg; $f._arg$1 = _arg$1; $f._r = _r; $f._r$1 = _r$1; $f.p = p; $f.x = x; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	PageView.prototype.Render = function() { return this.$val.Render(); };
 	ptrType.methods = [{prop: "Render", name: "Render", pkg: "", typ: $funcType([], [vecty.ComponentOrHTML], false)}];
@@ -10249,7 +10234,7 @@ $packages["."] = (function() {
 	return $pkg;
 })();
 $synthesizeMethods();
-var $mainPkg = $packages["."];
+var $mainPkg = $packages["main"];
 $packages["runtime"].$init();
 $go($mainPkg.$init, []);
 $flushConsole();

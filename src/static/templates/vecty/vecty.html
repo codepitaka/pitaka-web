@@ -1,8 +1,11 @@
 {{define "vecty.html"}}
     <html>
 		<body>
-			<div id="foo"></div>
-  			<script src="js/scripts.js"></script>
+			{{template "header.tmpl" .}}
+			{{template "navBar.tmpl"}}
+			{{template "contents.tmpl" .}}
+			<div id="vecty-content"></div>
+  			<script src="/static/templates/vecty/scripts/scripts.js"></script>
 		</body>
     </html>
 {{end}}

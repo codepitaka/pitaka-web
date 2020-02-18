@@ -50,7 +50,7 @@ echo "GOPATH dir creation complete."
 
 echo "setting environment variables for go..."
 export GOROOT=/usr/local/go
-export GOPATH=~/.go
+export GOPATH=/workspace/pitaka/codepitaka/gopath
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 echo "setting environment variables for go completed"
 
