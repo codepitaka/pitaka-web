@@ -28,7 +28,6 @@ func (engineWrapper EngineWrapper) LoadStaticFiles(directoryPath string){
 	engineWrapper.engine.LoadHTMLFiles(htmlTemplatePaths...)
 	
 	//todo loadTemplate과 중복된다. CSS만 뽑아내지 못한다.
- 	//loadTemplate없이 loadCSS에 있는 내부함수만으로 html까지 제공할 수 있으려나?
 	engineWrapper.engine.Static("/static/templates", directoryPath)
 }
 
