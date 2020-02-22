@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"pitaka-web/src/config"
-	"pitaka-web/src/config/constants"
 
 	"github.com/gin-gonic/gin"
 )
@@ -51,7 +50,7 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 	})
 
 	engineRouter.GET("/posts=:type", func(c *gin.Context) {
-		res, err := http.Get(constants.DevServerURL + "/posts/" + c.Param("type"))
+		res, err := http.Get(configurations.DatabaseURL() + "/posts/" + c.Param("type"))
 		if err != nil {
 			panic(err.Error())
 		}
@@ -90,7 +89,7 @@ func SetRouter(engineRouter *gin.Engine, configurations *config.Configuration) {
 	})
 
 	engineRouter.GET("/post=:id", func(c *gin.Context) {
-		res, err := http.Get(constants.DevServerURL + "/posts/" + c.Param("id"))
+		res, err := http.Get(configurations.DatabaseURL() + "/posts/" + c.Param("id"))
 		if err != nil {
 			panic(err.Error())
 		}
