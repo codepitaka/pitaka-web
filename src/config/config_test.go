@@ -16,7 +16,7 @@ func Test_DatabaseURL(t *testing.T){
 		{"PRD", "https://pitaka-server.herokuapp.com"},
 		{"DEV", "https://pitaka-server-dev.herokuapp.com"},
 		{"RVW", "https://pitaka-server-dev.herokuapp.com"},
-		{"LOCAL", "https://port-3000-pitaka.run.goorm.io"},
+		{"LOCAL", "http://localhost:3000"},
 	}
 	
 	currentAPPMODE := os.Getenv("APPMODE")
@@ -68,7 +68,7 @@ func Test_initializeDatabaseURL(t *testing.T){
 		{"PRD", "https://pitaka-server.herokuapp.com", nil},
 		{"DEV", "https://pitaka-server-dev.herokuapp.com", nil},
 		{"RVW", "https://pitaka-server-dev.herokuapp.com", nil}, // same dev server
-		{"LOCAL", "https://port-3000-pitaka.run.goorm.io", nil},
+		{"LOCAL", "http://localhost:3000", nil},
 		{"WRONG APPMODE", "INVALID", errors.New("Invalid AppMode.")},
 	}
 	
