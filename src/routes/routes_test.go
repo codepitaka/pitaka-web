@@ -7,9 +7,10 @@ import (
 	"strings"
 	"testing"
 
+	"pitaka-web/src/config"
+	"pitaka-web/src/utils"
+
 	"github.com/PuerkitoBio/goquery"
-	"github.com/codepitaka/pitaka-web/src/config"
-	"github.com/codepitaka/pitaka-web/src/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )

@@ -1,1 +1,0 @@
--d none -s -R vendor. -r [\.go,.static/\w*$]

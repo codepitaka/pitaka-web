@@ -1,0 +1,18 @@
+package: pitaka-web
+import:
+- package: github.com/codepitaka/pitaka-web
+  subpackages:
+  - src/config
+  - src/config/constants
+  - src/engine
+  - src/routes
+  - src/utils
+- package: github.com/gin-gonic/gin
+- package: github.com/gopherjs/vecty
+  subpackages:
+  - elem
+testImport:
+- package: github.com/PuerkitoBio/goquery
+- package: github.com/stretchr/testify
+  subpackages:
+  - assert

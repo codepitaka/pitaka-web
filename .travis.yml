@@ -1,11 +1,20 @@
 language: go
 go:
-- 1.13.6
+- 1.12.16
+go_import_path: pitaka-web
 sudo: false
-install:
-- export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
-- export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
+before_install:
+  - printenv TRAVIS_BUILD_DIR
+  - export PATH="${TRAVIS_BUILD_DIR}/vendor:${TRAVIS_BUILD_DIR}:$PATH"
+  - GLIDE_OS_ARCH=`go env GOHOSTOS`-`go env GOHOSTARCH`
+  - GLIDE_TAG=$(curl -s https://glide.sh/version)
+  - GLIDE_LATEST_RELEASE_URL="https://github.com/Masterminds/glide/releases/download/${GLIDE_TAG}/glide-${GLIDE_TAG}-${GLIDE_OS_ARCH}.tar.gz"
+  - wget ${GLIDE_LATEST_RELEASE_URL} -O /tmp/glide.tar.gz
+  - mkdir /tmp/glide
+  - tar --directory=/tmp/glide -xvf /tmp/glide.tar.gz
+  - export PATH=$PATH:/tmp/glide/${GLIDE_OS_ARCH}
 before_script:
+- glide install
 - go get github.com/axw/gocov/gocov
 - go vet ./...
 - go get -u github.com/golangci/golangci-lint/cmd/golangci-lint

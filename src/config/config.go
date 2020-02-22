@@ -3,7 +3,7 @@ package config
 import (
 	"errors"
 	"os"
-	"github.com/codepitaka/pitaka-web/src/config/constants"
+	"pitaka-web/src/config/constants"
 	"fmt"
 	// log "github.com/sirupsen/logrus"
 )
