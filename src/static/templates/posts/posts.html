@@ -1,0 +1,42 @@
+{{define "posts.html"}}
+    <html>
+		<head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		</head>
+		<div style="margin-top: 5%; margin-left: 3%;">
+		{{template "header.tmpl" .}}
+		{{template "navBar.tmpl" .}}
+		{{template "contents.tmpl" .}}
+			<button type="button" id="publishedButton" onclick="location.href='/posts=published'" class="btn btn-outline-info">published</button>
+			<button type="button" id="draftButton" onclick="location.href='/posts=draft'" class="btn btn-outline-info">draft</button>
+			<div style="margin-top: 2%;">
+				<h3 id="postsTitle" style="margin-left: 3%;"></h3>
+				{{ range $index, $value := .posts }}
+					<div class="card" style="margin-left: 3%; margin-bottom:2%; width:50%;">
+						<div class="card-header">
+							{{ $value.id }} - 생성: {{ $value.created_at }} / 수정: {{ $value.updated_at}}
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">{{ $value.title }}</h5>
+							<p class="card-text">{{ $value.subtitle }}</p>
+							<a name="card-detail-button" href="/post={{ $value.id }}/" class="btn btn-primary">Detail</a>
+						</div>
+					</div>
+				{{ end }}
+			</div>
+		</div>
+		<script type="text/javascript">
+			if ({{ .type }} === "published") {
+				document.getElementById("publishedButton").disabled = true;
+			} else {
+				document.getElementById("draftButton").disabled = true;
+				const draftDetailButtons = document.getElementsByName("card-detail-button");
+				for (var i = 0; i < draftDetailButtons.length; i++) {
+					draftDetailButtons[i].href += "draft/"
+				}
+			}
+			document.getElementById("postsTitle").textContent = {{ .type }};
+		</script>
+    </html>
+{{end}}

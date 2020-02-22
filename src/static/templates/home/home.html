@@ -1,9 +1,11 @@
 {{define "home.html"}}
     <html>
 		<body>
-			{{template "header.tmpl" .}}
-			{{template "navBar.tmpl"}}
-			{{template "contents.tmpl" .}}
+			<div style="margin-top: 5%; margin-left: 3%;">
+				{{template "header.tmpl" .}}
+				{{template "navBar.tmpl"}}
+				{{template "contents.tmpl" .}}
+			</div>
 		</body>
     </html>
 {{end}}

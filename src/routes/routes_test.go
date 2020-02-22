@@ -1,19 +1,21 @@
 package routes
 
 import (
-    "testing"
+	"log"
 	"net/http"
+	"net/http/httptest"
 	"strings"
+	"testing"
+
+	"pitaka-web/src/config"
+	"pitaka-web/src/utils"
+
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
-	"net/http/httptest"
-    "github.com/stretchr/testify/assert"
-	"pitaka-web/src/utils"
-	"pitaka-web/src/config"
-	"log"
+	"github.com/stretchr/testify/assert"
 )
 
-func setUp() *gin.Engine{	
+func setUp() *gin.Engine {
 	configurations := config.New()
 	engine := gin.New()
 	SetRouter(engine, configurations)
@@ -24,24 +26,25 @@ func setUp() *gin.Engine{
 }
 
 func performRequest(r http.Handler, method, path string) *httptest.ResponseRecorder {
-   req, _ := http.NewRequest(method, path, nil)
-   res := httptest.NewRecorder()
-   r.ServeHTTP(res, req)
-   return res
+	req, _ := http.NewRequest(method, path, nil)
+	res := httptest.NewRecorder()
+	r.ServeHTTP(res, req)
+	return res
 }
 
 func Test_Routes(t *testing.T) {
-    // Setup router
+	// Setup router
 	router := setUp()
-	
+
 	// data for test
-	tests := []string {
+	tests := []string{
 		"/",
 		"/login",
 		"/edit",
 		"/create",
+		"/posts=published",
 	}
-	
+
 	for _, test := range tests {
 		t.Run(test, func(t *testing.T) {
 			// Perform a GET request with that handler.
@@ -53,17 +56,17 @@ func Test_Routes(t *testing.T) {
 }
 
 func Test_All_Routes_Status_200(t *testing.T) {
-    // Setup router
+	// Setup router
 	router := setUp()
-	
+
 	// data for test
-	tests := []string {
+	tests := []string{
 		"/",
 		"/login",
 		"/edit",
 		"/create",
 	}
-	
+
 	for _, test := range tests {
 		t.Run(test, func(t *testing.T) {
 			// Perform a GET request with that handler.
@@ -75,12 +78,12 @@ func Test_All_Routes_Status_200(t *testing.T) {
 }
 
 func Test_HTML_Title(t *testing.T) {
-    // Setup router
+	// Setup router
 	router := setUp()
-	
+
 	// data for test
 	tests := []struct {
-		route  string
+		route string
 		title string
 	}{
 		{"/", "Welcome to Pitaka!"},
@@ -88,7 +91,7 @@ func Test_HTML_Title(t *testing.T) {
 		{"/edit", "You can edit!"},
 		{"/create", "You can create!"},
 	}
-	
+
 	for _, test := range tests {
 		t.Run(test.route, func(t *testing.T) {
 			// Perform a GET request with that handler.
@@ -97,8 +100,8 @@ func Test_HTML_Title(t *testing.T) {
 			doc, err := goquery.NewDocumentFromReader(res.Body)
 			if err != nil {
 				log.Fatal(err)
-		    }
-			
+			}
+
 			// find h1 element text data and validate
 			title := strings.TrimSpace(doc.Find("h1").First().Text())
 			// Assert we entered title correctly,
